@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechael | Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        /* Navbar - matches main site */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: #4a4a4a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #000;
+        }
+
+        /* Main resume container - single column, like Haroun */
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Header section */
+        .resume-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 2rem;
+        }
+
+        .resume-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-title {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .resume-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .resume-contact a, .resume-contact span {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .resume-contact a:hover {
+            color: #000;
+        }
+
+        .resume-contact i {
+            margin-right: 0.3rem;
+            width: 16px;
+            color: #999;
+        }
+
+        /* Section styling - exactly like Haroun */
+        .resume-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        /* Individual experience item */
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+        }
+
+        .experience-date {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .experience-description {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-top: 0.25rem;
+        }
+
+        /* Animated pill badges - modern GitHub style */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%);
+            border: 1px solid #e1e4e8;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1f2328;
+            transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated shine effect on hover */
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+            border-color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background: linear-gradient(135deg, #ffffff 0%, #f6f8fa 100%);
+        }
+
+        .skill-item i {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Category-specific border colors (like GitHub language colors) */
+        .skill-item[data-cat="tools"] { border-left: 3px solid #3b82f6; }
+        .skill-item[data-cat="tech"] { border-left: 3px solid #10b981; }
+        .skill-item[data-cat="framework"] { border-left: 3px solid #8b5cf6; }
+        .skill-item[data-cat="database"] { border-left: 3px solid #f59e0b; }
+        .skill-item[data-cat="soft"] { border-left: 3px solid #ec489a; }
+
+        /* Optional: subtle background tint on hover for categories */
+        .skill-item[data-cat="tools"]:hover { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%); }
+        .skill-item[data-cat="tech"]:hover { background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 100%); }
+        .skill-item[data-cat="framework"]:hover { background: linear-gradient(135deg, #f5f3ff 0%, #ffffff 100%); }
+        .skill-item[data-cat="database"]:hover { background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); }
+        .skill-item[data-cat="soft"]:hover { background: linear-gradient(135deg, #fdf2f8 0%, #ffffff 100%); }
+
+        /* Education & Certifications (simple text) */
+        .education-item, .cert-item {
+            margin-bottom: 1rem;
+        }
+
+        .education-degree, .cert-name {
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .education-school, .cert-issuer {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .education-date, .cert-date {
+            color: #888;
+            font-size: 0.8rem;
+            margin-left: 1rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #f0f0f0;
+            margin: 2rem 0;
+        }
+
+        /* Download button */
+        .download-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #1a1a1a;
+            color: white;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: #333;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                padding: 2rem 1.5rem;
+            }
+            .resume-name {
+                font-size: 2rem;
+            }
+            .experience-header {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            .resume-contact {
+                gap: 1rem;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Rechael</a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+    </nav>
+
+    <div class="resume-container">
+        <!-- Header -->
+        <div class="resume-header">
+            <div class="resume-name">Rechael</div>
+            <div class="resume-title">Full Stack Developer</div>
+            <!--<div class="resume-contact">
+                <span><i class="fas fa-envelope"></i> rechael@example.com</span>
+                <span><i class="fas fa-phone"></i> +1 234 567 8900</span>
+                <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                <a href="#"><i class="fab fa-github"></i> github/rechaellop</a>
+                <a href="#"><i class="fab fa-linkedin"></i> linkedin/in/rechael</a>
+            </div>-->
+        </div>
+
+        <!-- Work Experience Section (exactly like Haroun) -->
+        <div class="resume-section">
+            <div class="section-title">Work Experience</div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Senior Frontend Developer @ TechCorp Solutions</span>
+                    <span class="experience-date">2023 - Present</span>
+                </div>
+                <div class="experience-description">
+                    Lead development of responsive web applications using React and TypeScript, serving 100k+ monthly users. Collaborate with design team to implement pixel-perfect UIs and optimize performance, reducing load time by 40%. Mentor 3 junior developers and conduct code reviews to maintain high quality standards. Implement CI/CD pipelines using GitHub Actions.
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Full Stack Developer @ Creative Agency</span>
+                    <span class="experience-date">2021 - 2023</span>
+                </div>
+                <div class="experience-description">
+                    Built and maintained 15+ client websites using modern HTML/CSS/JS frameworks. Implemented responsive designs ensuring cross-browser compatibility across all devices. Integrated RESTful APIs and third-party services to extend website functionality. Optimized website performance, achieving 90+ scores on Lighthouse metrics.
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Junior Web Developer @ StartupHub</span>
+                    <span class="experience-date">2020 - 2021</span>
+                </div>
+                <div class="experience-description">
+                    Developed reusable UI components for internal design system. Assisted in migrating legacy codebase to modern JavaScript frameworks. Participated in agile ceremonies and contributed to sprint planning. Fixed bugs and implemented feature requests based on user feedback.
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Software Engineering Intern @ CloudTech Inc</span>
+                    <span class="experience-date">Summer 2019</span>
+                </div>
+                <div class="experience-description">
+                    Built internal dashboard for monitoring cloud infrastructure metrics. Collaborated with senior engineers to debug production issues. Wrote unit tests and documentation for API endpoints.
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Education Section -->
+        <div class="resume-section">
+            <div class="section-title">Education</div>
+
+            <div class="education-item">
+                <span class="education-degree">Master of Science in Computer Science</span>
+                <span class="education-date">2022 - 2024</span>
+                <div class="education-school">Stanford University · GPA: 3.9/4.0</div>
+            </div>
+
+            <div class="education-item">
+                <span class="education-degree">Bachelor of Technology in Computer Science</span>
+                <span class="education-date">2018 - 2022</span>
+                <div class="education-school">University of Technology · Graduated with Honors</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Skills Section - Categorized like GitHub -->
+        <div class="resume-section">
+            <div class="section-title">Skills</div>
+            
+            <!-- Application & Tools -->
+            <div style="margin-bottom: 1.5rem;">
+                <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 0.75rem;">
+                    <i class="fas fa-tools"></i> Application & Tools
+                </div>
+                <div class="skills-list">
+                    <span class="skill-item" data-cat="tools"><i class="fab fa-microsoft"></i> Microsoft 365</span>
+                    <span class="skill-item" data-cat="tools"><i class="fab fa-docker"></i> Docker</span>
+                    <span class="skill-item" data-cat="tools"><i class="fas fa-code-branch"></i> Jenkins</span>
+                    <span class="skill-item" data-cat="tools"><i class="fas fa-pencil-ruler"></i> UI/UX Principles</span>
+                    <span class="skill-item" data-cat="tools"><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+                    <span class="skill-item" data-cat="tools"><i class="fas fa-chart-line"></i> Power BI</span>
+                    <span class="skill-item" data-cat="tools"><i class="fab fa-github"></i> GitHub Actions</span>
+                    <span class="skill-item" data-cat="tools"><i class="fab fa-aws"></i> AWS</span>
+                    <span class="skill-item" data-cat="tools"><i class="fab fa-microsoft"></i> Azure</span>
+                </div>
+            </div>
+            
+            <!-- Tech Stack -->
+            <div style="margin-bottom: 1.5rem;">
+                <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 0.75rem;">
+                    <i class="fas fa-code"></i> Tech Stack
+                </div>
+                <div class="skills-list">
+                    <span class="skill-item" data-cat="tech"><i class="fas fa-database"></i> JSON</span>
+                    <span class="skill-item" data-cat="tech"><i class="fas fa-terminal"></i> Scripting Languages</span>
+                    <span class="skill-item" data-cat="tech"><i class="fab fa-python"></i> Python</span>
+                    <span class="skill-item" data-cat="tech"><i class="fas fa-database"></i> SQL</span>
+                    <span class="skill-item" data-cat="tech"><i class="fas fa-terminal"></i> PowerShell</span>
+                </div>
+            </div>
+            
+            <!-- Frameworks & APIs -->
+            <div style="margin-bottom: 1.5rem;">
+                <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 0.75rem;">
+                    <i class="fas fa-plug"></i> Frameworks & APIs
+                </div>
+                <div class="skills-list">
+                    <span class="skill-item" data-cat="framework"><i class="fas fa-bolt"></i> FastAPI</span>
+                    <span class="skill-item" data-cat="framework"><i class="fas fa-flask"></i> Flask</span>
+                    <span class="skill-item" data-cat="framework"><i class="fas fa-link"></i> REST APIs</span>
+                    <span class="skill-item" data-cat="framework"><i class="fas fa-network-wired"></i> Networking</span>
+                    <span class="skill-item" data-cat="framework"><i class="fas fa-sitemap"></i> System Design</span>
+                    <span class="skill-item" data-cat="framework"><i class="fas fa-plug"></i> API Integration</span>
+                </div>
+            </div>
+            
+            <!-- Databases -->
+            <div style="margin-bottom: 1.5rem;">
+                <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 0.75rem;">
+                    <i class="fas fa-database"></i> Databases
+                </div>
+                <div class="skills-list">
+                    <span class="skill-item" data-cat="database"><i class="fas fa-database"></i> PostgreSQL</span>
+                    <span class="skill-item" data-cat="database"><i class="fas fa-database"></i> MySQL</span>
+                    <span class="skill-item" data-cat="database"><i class="fas fa-database"></i> MS SQL Server</span>
+                    <span class="skill-item" data-cat="database"><i class="fas fa-database"></i> SQLite</span>
+                    <span class="skill-item" data-cat="database"><i class="fas fa-leaf"></i> MongoDB</span>
+                    <span class="skill-item" data-cat="database"><i class="fab fa-aws"></i> Amazon RDS</span>
+                </div>
+            </div>
+            
+            <!-- Others (Soft Skills & More) -->
+            <div style="margin-bottom: 0.5rem;">
+                <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #888; margin-bottom: 0.75rem;">
+                    <i class="fas fa-users"></i> Others
+                </div>
+                <div class="skills-list">
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-wrench"></i> Troubleshooting</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-robot"></i> Automation Workflow</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-comments"></i> Communication</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-lightbulb"></i> Problem-solving</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-chart-bar"></i> Incident Management & Reporting</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-check-circle"></i> Technical Proficiency</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-file-alt"></i> Documentation</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-expand-arrows-alt"></i> Flexibility</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-tasks"></i> Multitasking</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-chart-line"></i> Strong Analytical & Visualization Skills</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-brain"></i> Agile Mindset</span>
+                    <span class="skill-item" data-cat="soft"><i class="fas fa-handshake"></i> Cross-functional Collaboration</span>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Certifications Section -->
+        <!--<div class="resume-section">
+            <div class="section-title">Certifications</div>
+
+            <div class="cert-item">
+                <span class="cert-name">AWS Certified Solutions Architect</span>
+                <span class="cert-date">2024</span>
+                <div class="cert-issuer">Amazon Web Services</div>
+            </div>
+
+            <div class="cert-item">
+                <span class="cert-name">Meta Frontend Developer Professional Certificate</span>
+                <span class="cert-date">2023</span>
+                <div class="cert-issuer">Meta / Coursera</div>
+            </div>
+
+            <div class="cert-item">
+                <span class="cert-name">Google UX Design Professional Certificate</span>
+                <span class="cert-date">2023</span>
+                <div class="cert-issuer">Google / Coursera</div>
+            </div>
+
+            <div class="cert-item">
+                <span class="cert-name">JavaScript Algorithms and Data Structures</span>
+                <span class="cert-date">2022</span>
+                <div class="cert-issuer">freeCodeCamp</div>
+            </div>
+        </div>-->
+
+        <hr>
+
+        <!-- Achievements Section -->
+        <!--<div class="resume-section">
+            <div class="section-title">Achievements</div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Hackathon Winner 2024</span>
+                    <span class="experience-date">March 2024</span>
+                </div>
+                <div class="experience-description">
+                    Developed an AI-powered accessibility tool for visually impaired users, winning 1st place among 200+ participants at AI for Social Good Hackathon.
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Open Source Contributor</span>
+                    <span class="experience-date">2023 - Present</span>
+                </div>
+                <div class="experience-description">
+                    Active contributor to React, Next.js, and several UI libraries. 50+ PRs merged and recognized as top contributor in Q1 2024.
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <span class="experience-company">Google Developer Student Club Lead</span>
+                    <span class="experience-date">2022 - 2023</span>
+                </div>
+                <div class="experience-description">
+                    Organized 15+ workshops and hackathons, growing community from 50 to 500+ active members at university chapter.
+                </div>
+            </div>
+        </div>-->
+
+        <!-- Download Button -->
+        <div class="download-section">
+            <button id="downloadResumeBtn" class="download-btn">
+                <i class="fas fa-download"></i> Download Resume (PDF)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const downloadBtn = document.getElementById('downloadResumeBtn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const resumeContent = `RACHAEL - FULL STACK DEVELOPER
+================================
+
+CONTACT
+Email: rechael@example.com | Phone: +1 234 567 8900 | Location: San Francisco, CA
+GitHub: github.com/rechaellop | LinkedIn: linkedin.com/in/rechael
+
+WORK EXPERIENCE
+
+Senior Frontend Developer @ TechCorp Solutions (2023 - Present)
+Lead development of responsive web applications using React and TypeScript, serving 100k+ monthly users. Optimize performance, reducing load time by 40%. Mentor 3 junior developers and implement CI/CD pipelines.
+
+Full Stack Developer @ Creative Agency (2021 - 2023)
+Built and maintained 15+ client websites using modern frameworks. Implemented responsive designs and integrated RESTful APIs. Achieved 90+ Lighthouse scores.
+
+Junior Web Developer @ StartupHub (2020 - 2021)
+Developed reusable UI components and migrated legacy codebase. Participated in agile ceremonies and implemented feature requests.
+
+Software Engineering Intern @ CloudTech Inc (Summer 2019)
+Built internal dashboard for monitoring cloud infrastructure. Wrote unit tests and documentation.
+
+EDUCATION
+M.S. Computer Science - Stanford University (2022-2024) | GPA: 3.9/4.0
+B.Tech Computer Science - University of Technology (2018-2022) | Honors
+
+SKILLS
+JavaScript/TypeScript, React/Vue, Node.js, Python, Three.js, Tailwind CSS, Git, Figma, MongoDB, Docker, AWS
+
+CERTIFICATIONS
+- AWS Certified Solutions Architect (2024)
+- Meta Frontend Developer Certificate (2023)
+- Google UX Design Certificate (2023)
+- JavaScript Algorithms - freeCodeCamp (2022)
+
+ACHIEVEMENTS
+- Hackathon Winner 2024: AI-powered accessibility tool (1st place among 200+ participants)
+- Open Source Contributor: 50+ PRs merged, top contributor Q1 2024
+- Google Developer Student Club Lead: Grew community from 50 to 500+ members`;
+                
+                const blob = new Blob([resumeContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Rechael_Resume.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+    </script>
+</body>
+</html>

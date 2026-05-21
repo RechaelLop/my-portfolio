@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechael | Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.5;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: #4a4a4a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .projects-header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+
+        .projects-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .projects-header p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0 4rem;
+        }
+
+        /* Animated Card - like Arshnoor */
+        .project-card {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+            position: relative;
+        }
+
+        /* The hover animation - moves up and gets shadow */
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: #d0d0d0;
+        }
+
+        /* Subtle scale animation on image area */
+        .card-image {
+            height: 200px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #999;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .card-image {
+            transform: scale(1.02);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: #f0f0f0;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.2s;
+        }
+
+        .project-card:hover .tech-tag {
+            background: #e5e5e5;
+        }
+
+        /* Two buttons exactly like Arshnoor */
+        .card-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .card-btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-github {
+            background: #f5f5f5;
+            color: #1a1a1a;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-github:hover {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        .btn-demo {
+            background: #1a1a1a;
+            color: white;
+            border: 1px solid #1a1a1a;
+        }
+
+        .btn-demo:hover {
+            background: #333;
+            transform: translateY(-2px);
+            gap: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+            font-size: 0.8rem;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            .projects-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Rechael</a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="projects-header">
+            <h1>My Projects</h1>
+            <p>Exploring the intersection of design, technology, and innovation</p>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+
+    <footer>
+        <p>© 2025 Rechael. Crafted with curiosity.</p>
+    </footer>
+
+    <script>
+        // Project Data - Add your real projects here
+        const projects = [
+            {
+                title: "AI Image Generator",
+                description: "Generate stunning images from text prompts using Stable Diffusion API. Features real-time generation and style transfer.",
+                tech: ["Python", "FastAPI", "React", "Stable Diffusion"],
+                githubLink: "https://github.com/rechaellop/ai-image-generator",
+                demoLink: "https://ai-image-generator.demo.com"
+            },
+            {
+                title: "Distributed Task Queue",
+                description: "Scalable task queue system using Redis and Celery. Handles thousands of concurrent tasks with priority queuing.",
+                tech: ["Python", "Redis", "Celery", "Docker"],
+                githubLink: "https://github.com/rechaellop/distributed-queue",
+                demoLink: "https://github.com/rechaellop/distributed-queue"
+            },
+            {
+                title: "Portfolio 3D",
+                description: "Interactive 3D portfolio website with Three.js. Features smooth animations and immersive user experience.",
+                tech: ["Three.js", "HTML/CSS", "JavaScript", "GSAP"],
+                githubLink: "https://github.com/rechaellop/Portfolio-Website",
+                demoLink: "https://rechaellop.github.io/Portfolio-Website"
+            },
+            {
+                title: "Weather Dashboard",
+                description: "Real-time weather application with interactive maps and 7-day forecast. Uses OpenWeatherMap API.",
+                tech: ["React", "OpenWeather API", "Chart.js", "CSS Modules"],
+                githubLink: "https://github.com/rechaellop/weather-dashboard",
+                demoLink: "https://weather-dashboard.demo.com"
+            },
+            {
+                title: "TaskFlow",
+                description: "Productivity app with drag-drop interface, task categories, and local storage persistence.",
+                tech: ["Vue.js", "Vuex", "Tailwind CSS", "LocalStorage"],
+                githubLink: "https://github.com/rechaellop/taskflow",
+                demoLink: "https://taskflow.demo.com"
+            },
+            {
+                title: "E-Commerce Backend",
+                description: "RESTful API for e-commerce platform with authentication, product management, and order processing.",
+                tech: ["Node.js", "Express", "MongoDB", "JWT"],
+                githubLink: "https://github.com/rechaellop/ecommerce-backend",
+                demoLink: "https://github.com/rechaellop/ecommerce-backend"
+            },
+            {
+                title: "Real-time Chat App",
+                description: "WebSocket-based chat application with rooms, private messages, and typing indicators.",
+                tech: ["Socket.io", "React", "Node.js", "Tailwind"],
+                githubLink: "https://github.com/rechaellop/chat-app",
+                demoLink: "https://chat-app.demo.com"
+            },
+            {
+                title: "ML Fraud Detection",
+                description: "Machine learning model for detecting fraudulent transactions with 95% accuracy.",
+                tech: ["Python", "Scikit-learn", "Pandas", "FastAPI"],
+                githubLink: "https://github.com/rechaellop/fraud-detection",
+                demoLink: "https://github.com/rechaellop/fraud-detection"
+            }
+        ];
+
+        // Function to create project cards
+        function createProjectCard(project) {
+            return `
+                <div class="project-card">
+                    <div class="card-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${project.title}</h3>
+                        <p class="card-description">${project.description}</p>
+                        <div class="tech-stack">
+                            ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                        <div class="card-buttons">
+                            <a href="${project.githubLink}" class="card-btn btn-github" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="${project.demoLink}" class="card-btn btn-demo" target="_blank">
+                                Live Demo <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render all projects
+        const projectsGrid = document.getElementById('projectsGrid');
+        if (projectsGrid) {
+            projectsGrid.innerHTML = projects.map(project => createProjectCard(project)).join('');
+        }
+
+        // Optional: Add intersection observer for fade-in animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply initial styles and observe cards
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
