@@ -82,7 +82,6 @@
             margin: 0 auto;
         }
 
-        /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -90,7 +89,6 @@
             padding: 2rem 0 4rem;
         }
 
-        /* Animated Card - like Arshnoor */
         .project-card {
             background: #ffffff;
             border: 1px solid #eaeaea;
@@ -100,23 +98,36 @@
             position: relative;
         }
 
-        /* The hover animation - moves up and gets shadow */
         .project-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             border-color: #d0d0d0;
         }
 
-        /* Subtle scale animation on image area */
         .card-image {
             height: 200px;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            background: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: #999;
+            overflow: hidden;
             transition: transform 0.3s ease;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-image img.contain {
+            object-fit: contain;
+            padding: 1rem;
+        }
+
+        .card-image i {
+            font-size: 3rem;
+            color: #FFFFFF;
         }
 
         .project-card:hover .card-image {
@@ -161,7 +172,6 @@
             background: #e5e5e5;
         }
 
-        /* Two buttons exactly like Arshnoor */
         .card-buttons {
             display: flex;
             gap: 1rem;
@@ -252,10 +262,11 @@
     </footer>
 
     <script>
-        // Project Data - Add your real projects here
+        // Project Data
         const projects = [
             {
                 title: "AI Image Generator",
+                imagePath: "Gallery/stocks.gif",
                 description: "Generate stunning images from text prompts using Stable Diffusion API. Features real-time generation and style transfer.",
                 tech: ["Python", "FastAPI", "React", "Stable Diffusion"],
                 githubLink: "https://github.com/rechaellop/ai-image-generator",
@@ -263,6 +274,7 @@
             },
             {
                 title: "Distributed Task Queue",
+                imagePath: "Gallery/food.gif",
                 description: "Scalable task queue system using Redis and Celery. Handles thousands of concurrent tasks with priority queuing.",
                 tech: ["Python", "Redis", "Celery", "Docker"],
                 githubLink: "https://github.com/rechaellop/distributed-queue",
@@ -270,6 +282,7 @@
             },
             {
                 title: "Portfolio 3D",
+                imagePath: "Gallery/agriculture.gif",
                 description: "Interactive 3D portfolio website with Three.js. Features smooth animations and immersive user experience.",
                 tech: ["Three.js", "HTML/CSS", "JavaScript", "GSAP"],
                 githubLink: "https://github.com/rechaellop/Portfolio-Website",
@@ -277,6 +290,7 @@
             },
             {
                 title: "Weather Dashboard",
+                imagePath: "Gallery/dashboard.gif",
                 description: "Real-time weather application with interactive maps and 7-day forecast. Uses OpenWeatherMap API.",
                 tech: ["React", "OpenWeather API", "Chart.js", "CSS Modules"],
                 githubLink: "https://github.com/rechaellop/weather-dashboard",
@@ -284,6 +298,7 @@
             },
             {
                 title: "TaskFlow",
+                imagePath: "Gallery/power.gif",
                 description: "Productivity app with drag-drop interface, task categories, and local storage persistence.",
                 tech: ["Vue.js", "Vuex", "Tailwind CSS", "LocalStorage"],
                 githubLink: "https://github.com/rechaellop/taskflow",
@@ -291,6 +306,7 @@
             },
             {
                 title: "E-Commerce Backend",
+                imagePath: "Gallery/book.gif",
                 description: "RESTful API for e-commerce platform with authentication, product management, and order processing.",
                 tech: ["Node.js", "Express", "MongoDB", "JWT"],
                 githubLink: "https://github.com/rechaellop/ecommerce-backend",
@@ -298,6 +314,7 @@
             },
             {
                 title: "Real-time Chat App",
+                imagePath: "Gallery/cloud.gif",
                 description: "WebSocket-based chat application with rooms, private messages, and typing indicators.",
                 tech: ["Socket.io", "React", "Node.js", "Tailwind"],
                 githubLink: "https://github.com/rechaellop/chat-app",
@@ -305,6 +322,39 @@
             },
             {
                 title: "ML Fraud Detection",
+                imagePath: "Gallery/script.gif",
+                description: "Machine learning model for detecting fraudulent transactions with 95% accuracy.",
+                tech: ["Python", "Scikit-learn", "Pandas", "FastAPI"],
+                githubLink: "https://github.com/rechaellop/fraud-detection",
+                demoLink: "https://github.com/rechaellop/fraud-detection"
+            },
+            {
+                title: "TaskFlow",
+                imagePath: "Gallery/library.gif",
+                description: "Productivity app with drag-drop interface, task categories, and local storage persistence.",
+                tech: ["Vue.js", "Vuex", "Tailwind CSS", "LocalStorage"],
+                githubLink: "https://github.com/rechaellop/taskflow",
+                demoLink: "https://taskflow.demo.com"
+            },
+            {
+                title: "E-Commerce Backend",
+                imagePath: "Gallery/test.gif",
+                description: "RESTful API for e-commerce platform with authentication, product management, and order processing.",
+                tech: ["Node.js", "Express", "MongoDB", "JWT"],
+                githubLink: "https://github.com/rechaellop/ecommerce-backend",
+                demoLink: "https://github.com/rechaellop/ecommerce-backend"
+            },
+            {
+                title: "Real-time Chat App",
+                imagePath: "Gallery/fitness.gif",
+                description: "WebSocket-based chat application with rooms, private messages, and typing indicators.",
+                tech: ["Socket.io", "React", "Node.js", "Tailwind"],
+                githubLink: "https://github.com/rechaellop/chat-app",
+                demoLink: "https://chat-app.demo.com"
+            },
+            {
+                title: "ML Fraud Detection",
+                imagePath: "Gallery/todo.gif",
                 description: "Machine learning model for detecting fraudulent transactions with 95% accuracy.",
                 tech: ["Python", "Scikit-learn", "Pandas", "FastAPI"],
                 githubLink: "https://github.com/rechaellop/fraud-detection",
@@ -312,12 +362,15 @@
             }
         ];
 
-        // Function to create project cards
+        // Function to create project cards - FIXED to show GIFs
         function createProjectCard(project) {
             return `
                 <div class="project-card">
                     <div class="card-image">
-                        <i class="fas fa-code"></i>
+                        ${project.imagePath ? 
+                            `<img src="${project.imagePath}" alt="${project.title} demo" onerror="this.src='https://placehold.co/400x200/f5f5f5/cccccc?text=No+Preview'">` : 
+                            `<i class="fas fa-code"></i>`
+                        }
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">${project.title}</h3>
@@ -344,7 +397,7 @@
             projectsGrid.innerHTML = projects.map(project => createProjectCard(project)).join('');
         }
 
-        // Optional: Add intersection observer for fade-in animation
+        // Intersection observer for fade-in animation
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -359,7 +412,6 @@
             });
         }, observerOptions);
 
-        // Apply initial styles and observe cards
         document.querySelectorAll('.project-card').forEach((card, index) => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';

@@ -100,6 +100,35 @@
             padding-top: 5rem;
         }
 
+        /* Hero split layout */
+        .hero-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-gif {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-gif-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            animation: floatGif 3s ease-in-out infinite;
+        }
+
         .hero-content h1 {
             font-size: 4rem;
             font-weight: 700;
@@ -113,6 +142,52 @@
             color: #666;
             max-width: 600px;
             margin-bottom: 2rem;
+        }
+
+        /* Welcome line with VIBGYOR gradient */
+        .welcome-line {
+            margin: 1.5rem 0 2rem;
+        }
+
+        .welcome-text {
+            font-size: 1.6rem;
+            font-weight: 600;
+            background: linear-gradient(
+                90deg,
+                #9400D3,  /* Violet */
+                #4B0082,  /* Indigo */
+                #0000FF,  /* Blue */
+                #00FF00,  /* Green */
+                #FFFF00,  /* Yellow */
+                #FF7F00,  /* Orange */
+                #FF0000   /* Red */
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: gradientShift 3s linear infinite, gentleBounce 2s ease-in-out infinite;
+        }
+
+        /* VIBGYOR animation - colors shift */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        /* Gentle bounce animation */
+        @keyframes gentleBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
         }
 
         .hero-buttons {
@@ -225,7 +300,7 @@
             background: #333;
         }
 
-        /* Certifications Grid - same as before */
+        /* Certifications Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -333,12 +408,27 @@
             border-top: 1px solid #f0f0f0;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 gap: 1rem;
             }
+            .hero-wrapper {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-gif-img {
+                max-width: 80%;
+            }
             .hero-content h1 {
                 font-size: 2.5rem;
+            }
+            .welcome-text {
+                font-size: 1.3rem;
             }
             .section-title {
                 font-size: 1.75rem;
@@ -380,12 +470,22 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <div class="hero-content">
-                    <h1>Hi, I'm Rechael</h1>
-                    <p>I craft digital experiences with clean code and thoughtful design. Welcome to my space on the web.</p>
-                    <div class="hero-buttons">
-                        <a href="projects.html" class="btn btn-primary">View Projects →</a>
-                        <a href="resume.html" class="btn btn-secondary">View Resume</a>
+                <div class="hero-wrapper">
+                    <div class="hero-content">
+                        <h1>Hi, I'm Rechael</h1>
+                        <p>Fullstack and cloud-focused software engineer building AI-driven and API-powered applications.</p>
+                        <div class="welcome-line">
+                            <span class="welcome-text">Welcome to my space on the web!</span>
+                        </div>
+                        <div class="hero-buttons">
+                            <a href="projects.html" class="btn btn-primary">View Projects →</a>
+                            <a href="resume.html" class="btn btn-secondary">View Resume</a>
+                        </div>
+                    </div>
+                    <div class="hero-gif">
+                        <video class="hero-gif-img" autoplay loop muted playsinline>
+                            <source src="Gallery/coding.mp4" type="video/mp4">
+                        </video>
                     </div>
                 </div>
             </div>
@@ -396,10 +496,10 @@
                 <h2 class="section-title">About</h2>
                 <div class="about-preview">
                     <p class="about-text">
-                        I'm a passionate developer who loves turning ideas into reality through code. With a keen eye for minimal design and interactive experiences, I focus on creating websites that are both beautiful and functional.
+                        I'm a passionate developer who loves turning ideas into reality through code. My focus is on creating fullstack, cloud-native solutions that deliver real impact, from backend reliability to frontend usability.
                     </p>
                     <p class="about-text">
-                        My journey started with simple HTML pages and has grown into crafting full-stack applications, 3D interactive experiences, and responsive designs that work everywhere.
+                        My journey started with simple HTML pages and has grown into fullstack and cloud-focused development, building AI-driven, API-powered applications across frontend and backend systems.
                     </p>
                     <p class="about-text">
                         Outside of coding, I explore design systems, contribute to open source, and continuously learn new technologies.
@@ -427,7 +527,7 @@
                             <div class="stat-label">Years Experience</div>
                         </div>
                     </div>
-                    <p>Explore my collection of 20+ projects showcasing expertise in AI, web development, distributed systems, and more.</p>
+                    <p>Explore my projects showcasing expertise in cloud migration, AI-driven applications, and scalable fullstack systems.</p>
                     <a href="projects.html" class="view-all-btn">
                         Browse All Projects <i class="fas fa-arrow-right"></i>
                     </a>
@@ -435,7 +535,7 @@
             </div>
         </section>
 
-        <!-- Certifications Section (Added Back) -->
+        <!-- Certifications Section -->
         <section id="certifications">
             <div class="container">
                 <h2 class="section-title">Certifications</h2>
@@ -464,21 +564,39 @@
         // Certifications Data
         const certifications = [
             {
-                title: "Frontend Developer",
-                description: "Advanced frontend development with modern frameworks.",
-                issuer: "Meta",
+                title: "AWS Cloud Practitioner Essentials",
+                description: "Foundational cloud computing and AWS services.",
+                issuer: "Amazon Web Services",
                 link: "#"
             },
             {
-                title: "UI/UX Design Principles",
-                description: "Human-centered design and prototyping.",
-                issuer: "Google",
+                title: "Microsoft Azure Fundamentals",
+                description: "Core Azure services and cloud concepts.",
+                issuer: "Microsoft",
                 link: "#"
             },
             {
-                title: "JavaScript Algorithms",
-                description: "Data structures and algorithms in JavaScript.",
-                issuer: "freeCodeCamp",
+                title: "AWS Machine Learning",
+                description: "Machine learning on AWS platform.",
+                issuer: "Amazon Web Services",
+                link: "#"
+            },
+            {
+                title: "Introduction to Data Analytics for Business",
+                description: "Data analytics fundamentals for business applications.",
+                issuer: "Verified",
+                link: "#"
+            },
+            {
+                title: "Data Science Job Simulation",
+                description: "Practical data science and machine learning applications.",
+                issuer: "British Airways",
+                link: "#"
+            },
+            {
+                title: "Technology Job Simulation",
+                description: "Real-world technology consulting and problem-solving.",
+                issuer: "Deloitte",
                 link: "#"
             }
         ];
@@ -529,5 +647,6 @@
             }
         });
     </script>
+    
 </body>
 </html>
