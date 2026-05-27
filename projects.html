@@ -104,9 +104,41 @@
             border-color: #d0d0d0;
         }
 
+        /* Status badge styles */
+        .status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .status-badge.live {
+            background: #10b981;
+            color: white;
+        }
+
+        .status-badge.coming-soon {
+            background: #f59e0b;
+            color: white;
+        }
+
+        /* Dim coming soon cards slightly */
+        .project-card.coming-soon {
+            opacity: 0.85;
+        }
+
+        .project-card.coming-soon:hover {
+            opacity: 1;
+        }
+
         .card-image {
             height: 200px;
-            background: #FFFFFF;
+            background: #f5f5f5;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -127,7 +159,7 @@
 
         .card-image i {
             font-size: 3rem;
-            color: #FFFFFF;
+            color: #999;
         }
 
         .project-card:hover .card-image {
@@ -172,6 +204,7 @@
             background: #e5e5e5;
         }
 
+       /* Simple gradient buttons */
         .card-buttons {
             display: flex;
             gap: 1rem;
@@ -183,38 +216,39 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.6rem 1rem;
+            padding: 0.7rem 1rem;
             border-radius: 10px;
-            text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            text-decoration: none;
+            transition: all 0.3s ease;
             cursor: pointer;
+            border: none;
         }
 
+        /* GitHub button - subtle gray gradient */
         .btn-github {
-            background: #f5f5f5;
-            color: #1a1a1a;
-            border: 1px solid #e0e0e0;
+            background: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%);
+            color: white;
         }
 
         .btn-github:hover {
-            background: #1a1a1a;
-            color: white;
-            border-color: #1a1a1a;
+            background: linear-gradient(135deg, #5a5a5a 0%, #3d3d3d 100%);
             transform: translateY(-2px);
+            gap: 0.75rem;
         }
 
+        /* Live Demo button - clean blue gradient (like Arshnoor) */
         .btn-demo {
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             color: white;
-            border: 1px solid #1a1a1a;
         }
 
         .btn-demo:hover {
-            background: #333;
+            background: linear-gradient(135deg, #4a90f6 0%, #3570eb 100%);
             transform: translateY(-2px);
             gap: 0.75rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         footer {
@@ -262,110 +296,127 @@
     </footer>
 
     <script>
-        // Project Data
+        // Project Data - All 12 Projects
         const projects = [
             {
-                title: "AI Image Generator",
+                title: "TestPilot AI",
+                imagePath: "Gallery/test.gif",
+                description: "AI-powered testing agent that automatically generates and runs test cases for web applications. Identifies bugs and suggests fixes.",
+                tech: ["TypeScript", "Playwright", "OpenAI API", "Jest"],
+                githubLink: "https://github.com/RechaelLop/TestPilot-AI",
+                demoLink: "#",
+                status: "live"
+            },
+            {
+                title: "Cloud Migration",
+                imagePath: "Gallery/cloud.gif",
+                description: "Enterprise cloud migration solution for BTC Enterprise using AWS ECS, Docker, and Power BI. Automates monitoring, API integration, and scalable workflows.",
+                tech: ["Python", "Flask", "Docker", "AWS ECS", "Power BI"],
+                githubLink: "https://github.com/RechaelLop/Cloud-Migration",
+                demoLink: "#",
+                status: "live"
+            },
+            {
+                title: "Stock Prediction",
                 imagePath: "Gallery/stocks.gif",
-                description: "Generate stunning images from text prompts using Stable Diffusion API. Features real-time generation and style transfer.",
-                tech: ["Python", "FastAPI", "React", "Stable Diffusion"],
-                githubLink: "https://github.com/rechaellop/ai-image-generator",
-                demoLink: "https://ai-image-generator.demo.com"
+                description: "Fullstack AI-powered web app using LSTM deep learning models to predict stock closing prices. Features real-time analytics dashboards and PostgreSQL database integration.",
+                tech: ["Python", "Streamlit", "LSTM", "PostgreSQL", "Power BI"],
+                githubLink: "https://github.com/RechaelLop/Stock-Prediction",
+                demoLink: "#",
+                status: "live"
             },
             {
-                title: "Distributed Task Queue",
-                imagePath: "Gallery/food.gif",
-                description: "Scalable task queue system using Redis and Celery. Handles thousands of concurrent tasks with priority queuing.",
-                tech: ["Python", "Redis", "Celery", "Docker"],
-                githubLink: "https://github.com/rechaellop/distributed-queue",
-                demoLink: "https://github.com/rechaellop/distributed-queue"
-            },
-            {
-                title: "Portfolio 3D",
+                title: "LunaSage",
                 imagePath: "Gallery/agriculture.gif",
-                description: "Interactive 3D portfolio website with Three.js. Features smooth animations and immersive user experience.",
-                tech: ["Three.js", "HTML/CSS", "JavaScript", "GSAP"],
-                githubLink: "https://github.com/rechaellop/Portfolio-Website",
-                demoLink: "https://rechaellop.github.io/Portfolio-Website"
+                description: "Dual-purpose AI application powered by lunar cycles. Helps farmers plan planting schedules and helps stargazers identify celestial events.",
+                tech: ["Python", "FastAPI", "React", "NASA APIs"],
+                githubLink: "https://github.com/RechaelLop/LunaSage",
+                demoLink: "#",
+                status: "live"
+            },
+            {
+                title: "PowerConnect",
+                imagePath: "Gallery/power.gif",
+                description: "IoT-based energy consumption monitoring dashboard with real-time analytics, usage predictions, and cost optimization recommendations.",
+                tech: ["Python", "FastAPI", "React", "InfluxDB", "MQTT"],
+                githubLink: "https://github.com/RechaelLop/PowerConnect",
+                demoLink: "#",
+                status: "coming-soon"
+            },
+            {
+                title: "Leaflet",
+                imagePath: "Gallery/book.gif",
+                description: "Community notice board platform for sharing announcements, events, and local information. Features real-time updates and location-based filtering.",
+                tech: ["JavaScript", "Node.js", "Express", "MongoDB", "Socket.io"],
+                githubLink: "https://github.com/RechaelLop/Leaflet",
+                demoLink: "#",
+                status: "live"
+            },
+            {
+                title: "SilverMoves",
+                imagePath: "Gallery/fitness.gif",
+                description: "Accessible fitness tracking platform designed for seniors. Features exercise demos, progress tracking, and gentle reminder systems.",
+                tech: ["React Native", "Firebase", "HealthKit API"],
+                githubLink: "https://github.com/RechaelLop/SilverMoves",
+                demoLink: "#",
+                status: "coming-soon"
             },
             {
                 title: "Weather Dashboard",
                 imagePath: "Gallery/dashboard.gif",
-                description: "Real-time weather application with interactive maps and 7-day forecast. Uses OpenWeatherMap API.",
+                description: "Real-time weather application with interactive maps, 7-day forecasting, and severe weather alerts using OpenWeatherMap API.",
                 tech: ["React", "OpenWeather API", "Chart.js", "CSS Modules"],
-                githubLink: "https://github.com/rechaellop/weather-dashboard",
-                demoLink: "https://weather-dashboard.demo.com"
+                githubLink: "https://github.com/RechaelLop/weather-dashboard",
+                demoLink: "#",
+                status: "coming-soon"
             },
             {
-                title: "TaskFlow",
-                imagePath: "Gallery/power.gif",
-                description: "Productivity app with drag-drop interface, task categories, and local storage persistence.",
-                tech: ["Vue.js", "Vuex", "Tailwind CSS", "LocalStorage"],
-                githubLink: "https://github.com/rechaellop/taskflow",
-                demoLink: "https://taskflow.demo.com"
-            },
-            {
-                title: "E-Commerce Backend",
-                imagePath: "Gallery/book.gif",
-                description: "RESTful API for e-commerce platform with authentication, product management, and order processing.",
-                tech: ["Node.js", "Express", "MongoDB", "JWT"],
-                githubLink: "https://github.com/rechaellop/ecommerce-backend",
-                demoLink: "https://github.com/rechaellop/ecommerce-backend"
-            },
-            {
-                title: "Real-time Chat App",
-                imagePath: "Gallery/cloud.gif",
-                description: "WebSocket-based chat application with rooms, private messages, and typing indicators.",
-                tech: ["Socket.io", "React", "Node.js", "Tailwind"],
-                githubLink: "https://github.com/rechaellop/chat-app",
-                demoLink: "https://chat-app.demo.com"
-            },
-            {
-                title: "ML Fraud Detection",
-                imagePath: "Gallery/script.gif",
-                description: "Machine learning model for detecting fraudulent transactions with 95% accuracy.",
-                tech: ["Python", "Scikit-learn", "Pandas", "FastAPI"],
-                githubLink: "https://github.com/rechaellop/fraud-detection",
-                demoLink: "https://github.com/rechaellop/fraud-detection"
-            },
-            {
-                title: "TaskFlow",
-                imagePath: "Gallery/library.gif",
-                description: "Productivity app with drag-drop interface, task categories, and local storage persistence.",
-                tech: ["Vue.js", "Vuex", "Tailwind CSS", "LocalStorage"],
-                githubLink: "https://github.com/rechaellop/taskflow",
-                demoLink: "https://taskflow.demo.com"
-            },
-            {
-                title: "E-Commerce Backend",
-                imagePath: "Gallery/test.gif",
-                description: "RESTful API for e-commerce platform with authentication, product management, and order processing.",
-                tech: ["Node.js", "Express", "MongoDB", "JWT"],
-                githubLink: "https://github.com/rechaellop/ecommerce-backend",
-                demoLink: "https://github.com/rechaellop/ecommerce-backend"
-            },
-            {
-                title: "Real-time Chat App",
-                imagePath: "Gallery/fitness.gif",
-                description: "WebSocket-based chat application with rooms, private messages, and typing indicators.",
-                tech: ["Socket.io", "React", "Node.js", "Tailwind"],
-                githubLink: "https://github.com/rechaellop/chat-app",
-                demoLink: "https://chat-app.demo.com"
-            },
-            {
-                title: "ML Fraud Detection",
+                title: "ToDo-AI Agent",
                 imagePath: "Gallery/todo.gif",
-                description: "Machine learning model for detecting fraudulent transactions with 95% accuracy.",
-                tech: ["Python", "Scikit-learn", "Pandas", "FastAPI"],
-                githubLink: "https://github.com/rechaellop/fraud-detection",
-                demoLink: "https://github.com/rechaellop/fraud-detection"
+                description: "Intelligent task management application with AI-powered prioritization, smart reminders, and natural language task creation.",
+                tech: ["JavaScript", "OpenAI API", "Node.js", "MongoDB"],
+                githubLink: "https://github.com/RechaelLop/To-Do-AI-Agent",
+                demoLink: "#",
+                status: "live"
+            },
+            {
+                title: "Linux Backup Automation",
+                imagePath: "Gallery/script.gif",
+                description: "Automated backup solution for Linux servers with scheduling, compression, encryption, and cloud storage integration (AWS S3/Azure Blob).",
+                tech: ["Bash", "Python", "Cron", "AWS CLI", "GPG"],
+                githubLink: "https://github.com/RechaelLop/linux-backup-automation",
+                demoLink: "#",
+                status: "coming-soon"
+            },
+            {
+                title: "Library Management System",
+                imagePath: "Gallery/library.gif",
+                description: "Full-featured library management system with book tracking, member management, borrowing history, and automated reminders.",
+                tech: ["Python", "Django", "PostgreSQL", "Bootstrap"],
+                githubLink: "https://github.com/RechaelLop/library-management-system",
+                demoLink: "#",
+                status: "coming-soon"
+            },
+            {
+                title: "Save Food",
+                imagePath: "Gallery/food.gif",
+                description: "A platform connecting surplus food donors with local communities. Reduces food waste through real-time inventory tracking and smart distribution logistics.",
+                tech: ["React", "Node.js", "MongoDB", "Google Maps API"],
+                githubLink: "https://github.com/RechaelLop/save-food",
+                demoLink: "#",
+                status: "coming-soon"
             }
         ];
 
-        // Function to create project cards - FIXED to show GIFs
+        // Function to create project cards with status badges
         function createProjectCard(project) {
             return `
-                <div class="project-card">
+                <div class="project-card ${project.status === 'coming-soon' ? 'coming-soon' : ''}">
+                    ${project.status ? `
+                        <div class="status-badge ${project.status === 'live' ? 'live' : 'coming-soon'}">
+                            ${project.status === 'live' ? '● Live' : '◔ Coming Soon'}
+                        </div>
+                    ` : ''}
                     <div class="card-image">
                         ${project.imagePath ? 
                             `<img src="${project.imagePath}" alt="${project.title} demo" onerror="this.src='https://placehold.co/400x200/f5f5f5/cccccc?text=No+Preview'">` : 
@@ -383,7 +434,7 @@
                                 <i class="fab fa-github"></i> GitHub
                             </a>
                             <a href="${project.demoLink}" class="card-btn btn-demo" target="_blank">
-                                Live Demo <i class="fas fa-external-link-alt"></i>
+                                ${project.status === 'live' ? 'Live Demo' : 'Preview'} <i class="fas fa-external-link-alt"></i>
                             </a>
                         </div>
                     </div>
