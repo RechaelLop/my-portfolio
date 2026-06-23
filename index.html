@@ -684,30 +684,37 @@
             transform: translateX(3px);
         }
 
-        /* Connect Section - Jithuna Style with Footer */
+        /* Connect Section - Slide Up from Bottom */
         .connect-section {
             padding: 5rem 0 0 0;
-            overflow: hidden;
             background: #faf8f5;
             border-radius: 24px;
             margin-top: 1rem;
+            overflow: hidden;
             position: relative;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .connect-wrapper {
+        /* The container that slides up */
+        .connect-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
             padding: 4rem 3rem 2rem;
+            /* Start hidden */
+            transform: translateY(100%);
             opacity: 0;
-            transform: translateY(60px);
-            transition: all 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: all 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
 
-        .connect-wrapper.visible {
-            opacity: 1;
+        /* When visible - slides up */
+        .connect-container.visible {
             transform: translateY(0);
+            opacity: 1;
         }
 
         /* Left Column */
@@ -751,85 +758,15 @@
             margin: 0;
         }
 
-        .connect-links {
+        /* Social Icons - Centered, Icon Only */
+        .connect-social {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-top: 0.5rem;
+            justify-content: flex-start;
         }
 
-        .connect-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            font-family: 'Anonymous Pro', monospace;
-            font-size: 0.95rem;
-            color: #1a1a1a;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid transparent;
-            width: fit-content;
-        }
-
-        .connect-link:hover {
-            color: #3b82f6;
-            border-bottom-color: #3b82f6;
-            gap: 1.25rem;
-        }
-
-        .connect-link i {
-            font-size: 1.1rem;
-            width: 24px;
-            text-align: center;
-            color: #888;
-            transition: color 0.3s ease;
-        }
-
-        .connect-link:hover i {
-            color: #3b82f6;
-        }
-
-        /* Right Column - Image */
-        .connect-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .connect-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 16px;
-            max-height: 300px;
-        }
-
-        /* Dotted Line Separator */
-        .connect-divider {
-            border-top: 2px dotted #d0ccc6;
-            margin: 0 3rem 1.5rem;
-            opacity: 0.6;
-        }
-
-        /* Footer inside Connect Section */
-        .connect-footer {
-            text-align: center;
-            padding: 1.5rem 2rem 2.5rem;
-            background: transparent;
-        }
-
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-icon {
-            color: #888;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
+        .social-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -837,14 +774,55 @@
             height: 44px;
             border-radius: 50%;
             border: 1px solid #e0ddd8;
+            color: #888;
+            font-size: 1.1rem;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .footer-icon:hover {
+        .social-icon:hover {
             color: #1a1a1a;
             border-color: #1a1a1a;
             transform: translateY(-3px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        /* Right Column - Image */
+        .connect-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .connect-img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+
+        /* Dotted Line Separator */
+        .connect-divider {
+            border-top: 2px dotted #d0ccc6;
+            margin: 0 3rem 0.5rem;
+            opacity: 0.6;
+        }
+
+        /* Footer - Reduced Height */
+        .connect-footer {
+            text-align: center;
+            padding: 0.8rem 2rem 1.2rem;
+            background: transparent;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.8s ease 0.4s;
+        }
+
+        .connect-footer.visible {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .footer-copy {
@@ -855,109 +833,49 @@
             margin: 0;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-            }
-            .hero-wrapper {
-                flex-direction: column;
-                text-align: center;
-                gap: 2rem;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .hero-gif-img {
-                max-width: 80%;
-            }
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            .welcome-text {
-                font-size: 1.3rem;
-            }
-            .section-title {
-                font-size: 1.75rem;
-            }
-            .container {
-                padding: 0 1.5rem;
-            }
-            section {
-                padding: 3rem 0;
-            }
-            .projects-stats {
-                gap: 1.5rem;
-            }
-            .stat-number {
-                font-size: 1.5rem;
-            }
-            .certifications-wrapper {
-                padding: 2.5rem 1.5rem;
-            }
+/* Responsive */
+@media (max-width: 768px) {
+    .connect-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2.5rem 1.5rem 1.5rem;
+        text-align: center;
+    }
 
-            .certifications-subtitle {
-                font-size: 1.5rem;
-            }
+    .connect-content {
+        align-items: center;
+        order: 2;
+    }
 
-            .cert-card {
-                min-width: 240px;
-                padding: 2rem 1.25rem;
-            }
+    .connect-image {
+        order: 1;
+    }
 
-            .scroll-arrow {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
+    .connect-heading {
+        font-size: 2rem;
+    }
 
-            .connect-wrapper {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 2.5rem 1.5rem 1.5rem;
-                text-align: center;
-            }
+    .connect-description {
+        max-width: 100%;
+    }
 
-            .connect-content {
-                align-items: center;
-                order: 2;
-            }
+    .connect-social {
+        justify-content: center;
+    }
 
-            .connect-image {
-                order: 1;
-            }
+    .connect-img {
+        max-height: 200px;
+        max-width: 300px;
+    }
 
-            .connect-heading {
-                font-size: 2rem;
-            }
+    .connect-divider {
+        margin: 0 1.5rem 0.5rem;
+    }
 
-            .connect-description {
-                max-width: 100%;
-            }
-
-            .connect-link {
-                justify-content: center;
-                width: 100%;
-            }
-
-            .connect-img {
-                max-height: 200px;
-            }
-
-            .connect-divider {
-                margin: 0 1.5rem 1rem;
-            }
-
-            .footer-social {
-                gap: 1.2rem;
-            }
-
-            .footer-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
+    .connect-footer {
+        padding: 0.5rem 1.5rem 1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -1061,43 +979,42 @@
             </div>
         </section>
 
-        <!-- Connect Section with Footer -->
+        <!-- Connect Section with Slide-Up Effect -->
         <section id="connect" class="connect-section">
-            <div class="container">
-                <div class="connect-wrapper">
-                    <!-- Left Column: Content -->
-                    <div class="connect-content">
-                        <h2 class="connect-heading">Interested in <span class="highlight-text">connecting?</span></h2>
-                        <p class="connect-description">
-                            I'm always open to new opportunities, collaborations, or just a friendly chat. 
-                        </p>
-                    </div>
-
-                    <!-- Right Column: Image -->
-                    <div class="connect-image">
-                        <img src="Gallery/profile.jpg" alt="Let's connect" class="connect-img">
-                    </div>
-                </div>
-
-                <!-- Dotted Line Separator -->
-                <div class="connect-divider"></div>
-
-                <!-- Footer inside Connect Section -->
-                <footer class="connect-footer">
-                    <div class="footer-social">
-                        <a href="mailto:rechael@example.com" class="footer-icon" aria-label="Email">
+            <div class="connect-container">
+                <!-- Left Column: Content -->
+                <div class="connect-content">
+                    <h2 class="connect-heading">Interested in <span class="highlight-text">connecting?</span></h2>
+                    <p class="connect-description">
+                        I'm always open to new opportunities, collaborations, or just a friendly chat. 
+                        Feel free to reach out!
+                    </p>
+                    <div class="connect-social">
+                        <a href="mailto:rechael@example.com" class="social-icon" aria-label="Email">
                             <i class="fas fa-envelope"></i>
                         </a>
-                        <a href="https://linkedin.com/in/rechaellop" class="footer-icon" target="_blank" aria-label="LinkedIn">
+                        <a href="https://linkedin.com/in/rechaellop" class="social-icon" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="https://github.com/RechaelLop" class="footer-icon" target="_blank" aria-label="GitHub">
+                        <a href="https://github.com/RechaelLop" class="social-icon" target="_blank" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
-                    <p class="footer-copy">© 2025 Rechael. Built with minimalism in mind.</p>
-                </footer>
+                </div>
+
+                <!-- Right Column: Image -->
+                <div class="connect-image">
+                    <img src="Gallery/profile-removebg-preview.png" alt="Let's connect" class="connect-img">
+                </div>
             </div>
+
+            <!-- Dotted Line Separator -->
+            <div class="connect-divider"></div>
+
+            <!-- Footer -->
+            <footer class="connect-footer">
+                <p class="footer-copy">© 2025 Rechael. Built with minimalism in mind.</p>
+            </footer>
         </section>
 
     <script>
@@ -1260,23 +1177,23 @@
             });
         }
 
-        // Connect Section - Slide Up Animation
-        const connectWrapper = document.querySelector('.connect-wrapper');
+        // Connect Section - Slide Up from Bottom
+        document.addEventListener('DOMContentLoaded', function() {
+            const connectContainer = document.querySelector('.connect-container');
+            const connectFooter = document.querySelector('.connect-footer');
 
-        if (connectWrapper) {
-            const connectObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        connectWrapper.classList.add('visible');
+            if (connectContainer) {
+                // Trigger the animation when the page loads
+                setTimeout(() => {
+                    connectContainer.classList.add('visible');
+                    if (connectFooter) {
+                        connectFooter.classList.add('visible');
                     }
-                });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px 0px -50px 0px'
-            });
-
-            connectObserver.observe(connectWrapper);
-        }
+                }, 400);
+            } else {
+                console.error('Connect container not found!');
+            }
+        });
     </script>
     
 </body>
