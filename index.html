@@ -684,10 +684,14 @@
             transform: translateX(3px);
         }
 
-        /* Connect Section */
+        /* Connect Section - Jithuna Style with Footer */
         .connect-section {
-            padding: 5rem 0;
+            padding: 5rem 0 0 0;
             overflow: hidden;
+            background: #faf8f5;
+            border-radius: 24px;
+            margin-top: 1rem;
+            position: relative;
         }
 
         .connect-wrapper {
@@ -695,9 +699,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
-            background: #faf8f5;
-            border-radius: 24px;
-            padding: 4rem 3rem;
+            padding: 4rem 3rem 2rem;
             opacity: 0;
             transform: translateY(60px);
             transition: all 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
@@ -725,7 +727,7 @@
         }
 
         .connect-heading .highlight-text {
-            color: #f68f3b;
+            color: #3b82f6;
             position: relative;
         }
 
@@ -736,7 +738,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: #f68f3b;
+            background: #3b82f6;
             opacity: 0.2;
         }
 
@@ -802,48 +804,55 @@
             max-height: 300px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .connect-wrapper {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 2.5rem 1.5rem;
-                text-align: center;
-            }
-
-            .connect-content {
-                align-items: center;
-                order: 2;
-            }
-
-            .connect-image {
-                order: 1;
-            }
-
-            .connect-heading {
-                font-size: 2rem;
-            }
-
-            .connect-description {
-                max-width: 100%;
-            }
-
-            .connect-link {
-                justify-content: center;
-                width: 100%;
-            }
-
-            .connect-img {
-                max-height: 200px;
-            }
+        /* Dotted Line Separator */
+        .connect-divider {
+            border-top: 2px dotted #d0ccc6;
+            margin: 0 3rem 1.5rem;
+            opacity: 0.6;
         }
 
-        footer {
+        /* Footer inside Connect Section */
+        .connect-footer {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem 2rem 2.5rem;
+            background: transparent;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-icon {
+            color: #888;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid #e0ddd8;
+            transition: all 0.3s ease;
+        }
+
+        .footer-icon:hover {
+            color: #1a1a1a;
+            border-color: #1a1a1a;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .footer-copy {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.7rem;
             color: #999;
-            font-size: 0.8rem;
-            border-top: 1px solid #f0f0f0;
+            letter-spacing: 0.5px;
+            margin: 0;
         }
 
         /* Responsive */
@@ -897,6 +906,53 @@
             }
 
             .scroll-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .connect-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2.5rem 1.5rem 1.5rem;
+                text-align: center;
+            }
+
+            .connect-content {
+                align-items: center;
+                order: 2;
+            }
+
+            .connect-image {
+                order: 1;
+            }
+
+            .connect-heading {
+                font-size: 2rem;
+            }
+
+            .connect-description {
+                max-width: 100%;
+            }
+
+            .connect-link {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .connect-img {
+                max-height: 200px;
+            }
+
+            .connect-divider {
+                margin: 0 1.5rem 1rem;
+            }
+
+            .footer-social {
+                gap: 1.2rem;
+            }
+
+            .footer-icon {
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
@@ -1005,7 +1061,7 @@
             </div>
         </section>
 
-        <!-- Connect Section -->
+        <!-- Connect Section with Footer -->
         <section id="connect" class="connect-section">
             <div class="container">
                 <div class="connect-wrapper">
@@ -1015,31 +1071,34 @@
                         <p class="connect-description">
                             I'm always open to new opportunities, collaborations, or just a friendly chat. 
                         </p>
-                        <div class="connect-links">
-                            <a href="mailto:lopes.rechael1307@gmail.com" class="connect-link">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/rechael-lopes/" class="connect-link" target="_blank">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://github.com/RechaelLop" class="connect-link" target="_blank">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
                     </div>
 
                     <!-- Right Column: Image -->
                     <div class="connect-image">
-                        <img src="Gallery/connect-image.gif" alt="Let's connect" class="connect-img">
+                        <img src="Gallery/profile.jpg" alt="Let's connect" class="connect-img">
                     </div>
                 </div>
+
+                <!-- Dotted Line Separator -->
+                <div class="connect-divider"></div>
+
+                <!-- Footer inside Connect Section -->
+                <footer class="connect-footer">
+                    <div class="footer-social">
+                        <a href="mailto:rechael@example.com" class="footer-icon" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/rechaellop" class="footer-icon" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/RechaelLop" class="footer-icon" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <p class="footer-copy">© 2025 Rechael. Built with minimalism in mind.</p>
+                </footer>
             </div>
         </section>
-    </main>
-
-    <footer>
-        <p>© 2025 Rechael. Built with minimalism in mind.</p>
-    </footer>
 
     <script>
 
