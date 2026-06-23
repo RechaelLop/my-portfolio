@@ -684,59 +684,158 @@
             transform: translateX(3px);
         }
 
-        /* Scroll Arrows */
-        .scroll-arrow {
-            background: #ffffff;
-            border: 1px solid #e0ddd8;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
+        /* Connect Section */
+        .connect-section {
+            padding: 5rem 0;
+            overflow: hidden;
+        }
+
+        .connect-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-            color: #1a1a1a;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            z-index: 5;
+            background: #faf8f5;
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
 
-        .scroll-arrow:hover {
-            background: #1a1a1a;
-            color: white;
-            border-color: #1a1a1a;
-            transform: scale(1.05);
+        .connect-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .scroll-arrow:active {
-            transform: scale(0.95);
-        }
-
-        .social-links {
+        /* Left Column */
+        .connect-content {
             display: flex;
+            flex-direction: column;
             gap: 1.5rem;
-            flex-wrap: wrap;
         }
 
-        .social-link {
+        .connect-heading {
+            font-family: 'Forum', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .connect-heading .highlight-text {
+            color: #f68f3b;
+            position: relative;
+        }
+
+        .connect-heading .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #f68f3b;
+            opacity: 0.2;
+        }
+
+        .connect-description {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 450px;
+            margin: 0;
+        }
+
+        .connect-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .connect-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: #f5f5f5;
-            border-radius: 40px;
-            text-decoration: none;
+            gap: 1rem;
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.95rem;
             color: #1a1a1a;
-            font-weight: 500;
-            transition: all 0.2s;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid transparent;
+            width: fit-content;
         }
 
-        .social-link:hover {
-            background: #1a1a1a;
-            color: white;
-            transform: translateY(-2px);
+        .connect-link:hover {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+            gap: 1.25rem;
+        }
+
+        .connect-link i {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+
+        .connect-link:hover i {
+            color: #3b82f6;
+        }
+
+        /* Right Column - Image */
+        .connect-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .connect-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            max-height: 300px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .connect-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2.5rem 1.5rem;
+                text-align: center;
+            }
+
+            .connect-content {
+                align-items: center;
+                order: 2;
+            }
+
+            .connect-image {
+                order: 1;
+            }
+
+            .connect-heading {
+                font-size: 2rem;
+            }
+
+            .connect-description {
+                max-width: 100%;
+            }
+
+            .connect-link {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .connect-img {
+                max-height: 200px;
+            }
         }
 
         footer {
@@ -907,13 +1006,32 @@
         </section>
 
         <!-- Connect Section -->
-        <section id="connect">
+        <section id="connect" class="connect-section">
             <div class="container">
-                <h2 class="section-title">Connect</h2>
-                <div class="social-links">
-                    <a href="https://github.com/RechaelLop" class="social-link"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://www.linkedin.com/in/rechael-lopes/" class="social-link"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
-                    <a href="#" class="social-link"><i class="fas fa-envelope"></i> Email</a>
+                <div class="connect-wrapper">
+                    <!-- Left Column: Content -->
+                    <div class="connect-content">
+                        <h2 class="connect-heading">Interested in <span class="highlight-text">connecting?</span></h2>
+                        <p class="connect-description">
+                            I'm always open to new opportunities, collaborations, or just a friendly chat. 
+                        </p>
+                        <div class="connect-links">
+                            <a href="mailto:lopes.rechael1307@gmail.com" class="connect-link">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/rechael-lopes/" class="connect-link" target="_blank">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/RechaelLop" class="connect-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Image -->
+                    <div class="connect-image">
+                        <img src="Gallery/connect-image.gif" alt="Let's connect" class="connect-img">
+                    </div>
                 </div>
             </div>
         </section>
@@ -1081,6 +1199,24 @@
                     behavior: 'smooth'
                 });
             });
+        }
+
+        // Connect Section - Slide Up Animation
+        const connectWrapper = document.querySelector('.connect-wrapper');
+
+        if (connectWrapper) {
+            const connectObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        connectWrapper.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            connectObserver.observe(connectWrapper);
         }
     </script>
     
