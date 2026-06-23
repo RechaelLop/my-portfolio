@@ -498,17 +498,122 @@
             min-width: max-content;
         }
 
-        /* Individual Certification Card - Different Colors */
+        /* Individual Certification Card - Cut Edge / Folded Corner Style */
         .cert-card {
             min-width: 280px;
             max-width: 320px;
-            border-radius: 20px;
+            border-radius: 20px 20px 20px 0;
             padding: 2.5rem 1.5rem 2rem;
             text-align: center;
             flex-shrink: 0;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            cursor: default;
+            clip-path: polygon(
+                0% 0%,
+                100% 0%,
+                100% 85%,
+                90% 100%,
+                0% 100%
+            );
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        /* Different cut positions for each card */
+        .cert-card:nth-child(1) { 
+            clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 88% 100%, 0% 100%);
+            border-radius: 24px 24px 0 0;
+        }
+        .cert-card:nth-child(2) { 
+            clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 92% 100%, 0% 100%);
+            border-radius: 24px 24px 0 0;
+        }
+        .cert-card:nth-child(3) { 
+            clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 85% 100%, 0% 100%);
+            border-radius: 20px 20px 0 0;
+        }
+        .cert-card:nth-child(4) { 
+            clip-path: polygon(0% 0%, 100% 0%, 100% 82%, 90% 100%, 0% 100%);
+            border-radius: 28px 28px 0 0;
+        }
+        .cert-card:nth-child(5) { 
+            clip-path: polygon(0% 0%, 100% 0%, 100% 88%, 94% 100%, 0% 100%);
+            border-radius: 20px 28px 0 0;
+        }
+        .cert-card:nth-child(6) { 
+            clip-path: polygon(0% 0%, 100% 0%, 100% 78%, 86% 100%, 0% 100%);
+            border-radius: 28px 20px 0 0;
+        }
+
+        /* Folded corner effect using pseudo-element */
+        .cert-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.06);
+            clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+            border-radius: 0 0 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover::after {
+            background: rgba(0,0,0,0.10);
+            width: 44px;
+            height: 44px;
+        }
+
+        /* Fold shadow effect */
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            box-shadow: -4px 4px 12px rgba(0,0,0,0.06);
+            border-radius: 0 0 12px 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+        }
+
+        /* Ensure content stays above clip path */
+        .cert-card-icon,
+        .cert-card-title,
+        .cert-card-issuer,
+        .cert-card-description,
+        .cert-card-link {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Color variants - slightly brighter for cut edge style */
+        .cert-card.color-1 { 
+            background: linear-gradient(145deg, #d4e6eb 0%, #c2d8de 100%); 
+        }
+        .cert-card.color-2 { 
+            background: linear-gradient(145deg, #ddddea 0%, #cecee0 100%); 
+        }
+        .cert-card.color-3 { 
+            background: linear-gradient(145deg, #f0d6d6 0%, #e8c4c4 100%); 
+        }
+        .cert-card.color-4 { 
+            background: linear-gradient(145deg, #d6ead6 0%, #c4dec4 100%); 
+        }
+        .cert-card.color-5 { 
+            background: linear-gradient(145deg, #e1eded 0%, #d0e0e0 100%); 
+        }
+        .cert-card.color-6 { 
+            background: linear-gradient(145deg, #eee3f2 0%, #e0d4e6 100%); 
         }
 
         .cert-card:hover {
@@ -920,7 +1025,7 @@
             {
                 title: "Introduction to Data Analytics for Business",
                 description: "Data analytics fundamentals for business applications.",
-                issuer: "Verified",
+                issuer: "University of Colorado",
                 link: "certificates/IntroductiontoDataAnalyticsforBusiness.pdf"
             },
             {
@@ -942,7 +1047,6 @@
         if (track) {
             certifications.forEach((cert, index) => {
                 const card = document.createElement('div');
-                // Assign different color classes cyclically
                 const colorClass = `color-${(index % 6) + 1}`;
                 card.className = `cert-card ${colorClass}`;
                 card.innerHTML = `
