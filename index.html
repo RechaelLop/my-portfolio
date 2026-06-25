@@ -273,7 +273,7 @@
         
         }
 
-        /* The Journey So Far Section */
+        /* The Journey So Far Section - Two Column Layout */
         .journey-section {
             padding: 4rem 0;
             background: #f0eae4;
@@ -282,13 +282,19 @@
         }
 
         .journey-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
             padding: 2rem 2rem 3rem;
+            align-items: start;
         }
 
-        /* Header */
-        .journey-header {
-            text-align: center;
-            margin-bottom: 3.5rem;
+        /* Left Column - Stationary */
+        .journey-left {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+            padding-top: 1rem;
         }
 
         .journey-title {
@@ -326,15 +332,17 @@
             opacity: 0.2;
         }
 
-        /* Timeline */
+        /* Right Column - Timeline */
+        .journey-right {
+            position: relative;
+        }
+
         .journey-timeline {
             position: relative;
             padding-left: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
-        /* Vertical line */
+        /* Vertical Dotted Line */
         .journey-timeline::before {
             content: '';
             position: absolute;
@@ -342,14 +350,41 @@
             left: 0;
             width: 2px;
             height: 100%;
+            background: transparent;
+            border-left: 2px dotted #d0ccc6;
+        }
+
+        /* Timeline Section Labels */
+        .timeline-label {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #888;
+            text-transform: uppercase;
+            margin: 2rem 0 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-label::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 50%;
+            width: 12px;
+            height: 2px;
             background: #d0ccc6;
         }
 
-        /* Individual timeline items */
+        /* Individual Journey Items */
         .journey-item {
-            display: flex;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: 60px 1fr 60px;
+            gap: 1.5rem;
+            align-items: center;
             margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
             position: relative;
             opacity: 0;
             transform: translateX(-20px);
@@ -361,98 +396,118 @@
             transform: translateX(0);
         }
 
-        /* Marker with year and dot */
-        .journey-marker {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 80px;
-            position: relative;
+        /* Dotted line connector from vertical line to each item */
+        .journey-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -2px;
+            width: 1.5rem;
+            height: 2px;
+            border-top: 2px dotted #d0ccc6;
         }
 
+        /* Dot on the vertical line */
+        .journey-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #f68f3b;
+            border: 2px solid #f0eae4;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+
+        /* Image */
+        .journey-image {
+            flex-shrink: 0;
+        }
+
+        .journey-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #ffffff;
+            border: 1px solid #e0ddd8;
+            padding: 4px;
+        }
+
+        /* Content */
+        .journey-content h4 {
+            font-family: 'Forum', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.15rem;
+        }
+
+        .journey-company {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Year */
         .journey-year {
             font-family: 'Forum', serif;
             font-size: 1rem;
             font-weight: 400;
             color: #1a1a1a;
-            background: #f0eae4;
-            padding: 0 0.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .journey-dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background: #f68f3b;
-            border: 3px solid #f0eae4;
-            position: relative;
-            z-index: 2;
-            margin-top: 0.25rem;
-        }
-
-        /* Content */
-        .journey-content {
-            flex: 1;
-            padding-bottom: 0.5rem;
-        }
-
-        .journey-content h4 {
-            font-family: 'Forum', serif;
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: #1a1a1a;
-            margin-bottom: 0.25rem;
-        }
-
-        .journey-company {
-            font-family: 'Anonymous Pro', monospace;
-            font-size: 0.85rem;
-            color: #888;
-            margin-bottom: 0.5rem;
-        }
-
-        .journey-description {
-            font-family: 'Anonymous Pro', monospace;
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.7;
+            text-align: right;
+            opacity: 0.6;
         }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .journey-wrapper {
+                grid-template-columns: 1fr 1.5fr;
+                gap: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .journey-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
                 padding: 1.5rem 1rem 2rem;
+            }
+
+            .journey-left {
+                position: static;
+                text-align: center;
             }
 
             .journey-subtitle {
                 font-size: 1.5rem;
             }
 
-            .journey-timeline {
-                padding-left: 1rem;
-            }
-
             .journey-item {
-                flex-direction: column;
-                gap: 0.5rem;
+                grid-template-columns: 50px 1fr 50px;
+                gap: 1rem;
+                padding-left: 1rem;
                 margin-bottom: 2rem;
             }
 
-            .journey-marker {
-                flex-direction: row;
-                min-width: unset;
-                gap: 1rem;
-                align-items: center;
+            .journey-item::before {
+                width: 1rem;
             }
 
-            .journey-dot {
-                margin-top: 0;
+            .journey-img {
+                width: 44px;
+                height: 44px;
             }
 
             .journey-content h4 {
-                font-size: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .journey-year {
+                font-size: 0.85rem;
             }
         }
 
@@ -1138,93 +1193,86 @@
         <section id="journey" class="journey-section">
             <div class="container">
                 <div class="journey-wrapper">
-                    <!-- Header -->
-                    <div class="journey-header">
+                    <!-- Left Column: Title (Stationary) -->
+                    <div class="journey-left">
                         <h3 class="journey-title">THE JOURNEY SO FAR</h3>
                         <p class="journey-subtitle">
                             Milestones that shaped my <span class="highlight-text">developer path</span>.
                         </p>
                     </div>
 
-                    <!-- Timeline -->
-                    <div class="journey-timeline">
-                        <!-- Item 1 -->
-                        <div class="journey-item">
-                            <div class="journey-marker">
-                                <span class="journey-year">2026</span>
-                                <span class="journey-dot"></span>
+                    <!-- Right Column: Timeline (Moving) -->
+                    <div class="journey-right">
+                        <div class="journey-timeline">
+                            
+                            <!-- Experience Section Label -->
+                            <div class="timeline-label">
+                                <span>Experience</span>
                             </div>
-                            <div class="journey-content">
-                                <h4>Web & Cloud Application Developer</h4>
-                                <p class="journey-company">iHelp International</p>
-                                <p class="journey-description">
-                                    Developing and enhancing fullstack web applications, supporting backend APIs, 
-                                    automation workflows, and cloud deployments.
-                                </p>
-                            </div>
-                        </div>
 
-                        <!-- Item 2 -->
-                        <div class="journey-item">
-                            <div class="journey-marker">
-                                <span class="journey-year">2023</span>
-                                <span class="journey-dot"></span>
+                            <!-- Item 1: Web & Cloud Application Developer -->
+                            <div class="journey-item">
+                                <div class="journey-image">
+                                    <img src="Gallery/ihelp-logo.png" alt="iHelp International" class="journey-img">
+                                </div>
+                                <div class="journey-content">
+                                    <h4>Web & Cloud Application Developer</h4>
+                                    <p class="journey-company">iHelp International</p>
+                                </div>
+                                <div class="journey-year">2026</div>
                             </div>
-                            <div class="journey-content">
-                                <h4>Post Graduation Diploma in Cloud Data Management</h4>
-                                <p class="journey-company">Conestoga College</p>
-                                <p class="journey-description">
-                                    Specialized in cloud infrastructure, DevOps, and scalable system design. 
-                                    GPA: 3.4/4.0.
-                                </p>
-                            </div>
-                        </div>
 
-                        <!-- Item 3 -->
-                        <div class="journey-item">
-                            <div class="journey-marker">
-                                <span class="journey-year">2021</span>
-                                <span class="journey-dot"></span>
+                            <!-- Item 2: Data & Operations Analyst -->
+                            <div class="journey-item">
+                                <div class="journey-image">
+                                    <img src="Gallery/a1-logo.png" alt="A1 Snehanjali" class="journey-img">
+                                </div>
+                                <div class="journey-content">
+                                    <h4>Data & Operations Analyst</h4>
+                                    <p class="journey-company">A1 Snehanjali</p>
+                                </div>
+                                <div class="journey-year">2021</div>
                             </div>
-                            <div class="journey-content">
-                                <h4>Data & Operations Analyst</h4>
-                                <p class="journey-company">A1 Snehanjali</p>
-                                <p class="journey-description">
-                                    Supported backend systems, API testing, deployment validation, and 
-                                    automation processes to improve operational efficiency.
-                                </p>
-                            </div>
-                        </div>
 
-                        <!-- Item 4 -->
-                        <div class="journey-item">
-                            <div class="journey-marker">
-                                <span class="journey-year">2021</span>
-                                <span class="journey-dot"></span>
+                            <!-- Education Section Label -->
+                            <div class="timeline-label">
+                                <span>Education</span>
                             </div>
-                            <div class="journey-content">
-                                <h4>Master's of Science in Information Technology</h4>
-                                <p class="journey-company">University of Mumbai</p>
-                                <p class="journey-description">
-                                    Specialized in Cloud Computing. Built a strong foundation in distributed 
-                                    systems and scalable architectures.
-                                </p>
-                            </div>
-                        </div>
 
-                        <!-- Item 5 -->
-                        <div class="journey-item">
-                            <div class="journey-marker">
-                                <span class="journey-year">2018</span>
-                                <span class="journey-dot"></span>
+                            <!-- Item 3: Post Graduation Diploma -->
+                            <div class="journey-item">
+                                <div class="journey-image">
+                                    <img src="Gallery/conestoga-logo.png" alt="Conestoga College" class="journey-img">
+                                </div>
+                                <div class="journey-content">
+                                    <h4>Post Graduation Diploma in Cloud Data Management</h4>
+                                    <p class="journey-company">Conestoga College</p>
+                                </div>
+                                <div class="journey-year">2024</div>
                             </div>
-                            <div class="journey-content">
-                                <h4>Started My Coding Journey</h4>
-                                <p class="journey-company">First Line of Code</p>
-                                <p class="journey-description">
-                                    Began with HTML, CSS, and JavaScript — and never looked back. 
-                                    Built my first static websites and discovered a passion for development.
-                                </p>
+
+                            <!-- Item 4: Master's Degree -->
+                            <div class="journey-item">
+                                <div class="journey-image">
+                                    <img src="Gallery/mumbai-logo.png" alt="University of Mumbai" class="journey-img">
+                                </div>
+                                <div class="journey-content">
+                                    <h4>Master's of Science in Information Technology</h4>
+                                    <p class="journey-company">University of Mumbai</p>
+                                </div>
+                                <div class="journey-year">2023</div>
+                            </div>
+
+                            <!-- Item 5: Bachlor's Degree -->
+                            <div class="journey-item">
+                                <div class="journey-image">
+                                    <img src="Gallery/mumbai-logo.png" alt="St. Xavier's College" class="journey-img">
+                                </div>
+                                <div class="journey-content">
+                                    <h4>Bachlor's of Science in Information Technology</h4>
+                                    <p class="journey-company">St. Xavier's College</p>
+                                </div>
+                                <div class="journey-year">2021</div>
                             </div>
                         </div>
                     </div>
