@@ -74,11 +74,12 @@
             padding: 1.2rem 2rem;
             z-index: 1000;
             transition: all 0.4s ease;
-            background: transparent; /* Fully transparent by default */
+            background: rgba(240, 234, 228, 0.3); /* 50% opacity - more transparent */
+            backdrop-filter: blur(8px);
         }
 
         .navbar.scrolled {
-            background: rgba(240, 234, 228, 0.95); /* 95% opacity of #f0eae4 */
+            background: rgba(240, 234, 228, 0.55); 
             backdrop-filter: blur(10px);
             box-shadow: 0 1px 3px rgba(0,0,0,0.06);
         }
@@ -270,6 +271,189 @@
                 padding: 0.5rem 0 1.5rem 0;
             }
         
+        }
+
+        /* The Journey So Far Section */
+        .journey-section {
+            padding: 4rem 0;
+            background: #f0eae4;
+            border-radius: 24px;
+            margin-top: 1rem;
+        }
+
+        .journey-wrapper {
+            padding: 2rem 2rem 3rem;
+        }
+
+        /* Header */
+        .journey-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .journey-title {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .journey-subtitle {
+            font-family: 'Forum', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .journey-subtitle .highlight-text {
+            color: #f68f3b;
+            position: relative;
+        }
+
+        .journey-subtitle .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #f68f3b;
+            opacity: 0.2;
+        }
+
+        /* Timeline */
+        .journey-timeline {
+            position: relative;
+            padding-left: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Vertical line */
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: #d0ccc6;
+        }
+
+        /* Individual timeline items */
+        .journey-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+
+        .journey-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Marker with year and dot */
+        .journey-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+            position: relative;
+        }
+
+        .journey-year {
+            font-family: 'Forum', serif;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            background: #f0eae4;
+            padding: 0 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .journey-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #f68f3b;
+            border: 3px solid #f0eae4;
+            position: relative;
+            z-index: 2;
+            margin-top: 0.25rem;
+        }
+
+        /* Content */
+        .journey-content {
+            flex: 1;
+            padding-bottom: 0.5rem;
+        }
+
+        .journey-content h4 {
+            font-family: 'Forum', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .journey-company {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .journey-description {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .journey-wrapper {
+                padding: 1.5rem 1rem 2rem;
+            }
+
+            .journey-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .journey-timeline {
+                padding-left: 1rem;
+            }
+
+            .journey-item {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .journey-marker {
+                flex-direction: row;
+                min-width: unset;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .journey-dot {
+                margin-top: 0;
+            }
+
+            .journey-content h4 {
+                font-size: 1rem;
+            }
         }
 
         /* Projects Section - Full Width */
@@ -686,16 +870,35 @@
 
         /* Connect Section - Slide Up from Bottom */
         .connect-section {
-            padding: 5rem 0 0 0;
+            height: 100vh; /* Takes full viewport height */
+            overflow: hidden;
+            position: relative;
             background: #faf8f5;
             border-radius: 24px;
             margin-top: 1rem;
-            overflow: hidden;
-            position: relative;
-            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Trigger element - invisible, used for scroll detection */
+        .connect-trigger {
+            position: absolute;
+            top: -200px; /* Triggers before section is visible */
+            left: 0;
+            width: 100%;
+            height: 1px;
+            pointer-events: none;
+        }
+
+        /* Pin Wrapper - stays fixed while content slides */
+        .connect-pin-wrapper {
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
         }
 
         /* The container that slides up */
@@ -704,11 +907,13 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
-            padding: 4rem 3rem 2rem;
-            /* Start hidden */
-            transform: translateY(100%);
+            padding: 4rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            transform: translateY(80px);
             opacity: 0;
-            transition: all 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: all 1.8s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
 
         /* When visible - slides up */
@@ -722,6 +927,7 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            padding-left: 2rem; /* Added to match hero alignment */
         }
 
         .connect-heading {
@@ -734,7 +940,7 @@
         }
 
         .connect-heading .highlight-text {
-            color: #3b82f6;
+            color: #f68f3b;
             position: relative;
         }
 
@@ -745,7 +951,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: #3b82f6;
+            background: #f68f3b;
             opacity: 0.2;
         }
 
@@ -793,6 +999,7 @@
             justify-content: center;
             align-items: center;
             padding: 1rem;
+            padding-right: 2rem; /* Added to match hero alignment */
         }
 
         .connect-img {
@@ -807,6 +1014,11 @@
         .connect-divider {
             border-top: 2px dotted #d0ccc6;
             margin: 0 3rem 0.5rem;
+            opacity: 0;
+            transition: opacity 1.2s ease 0.6s;
+        }
+
+        .connect-divider.visible {
             opacity: 0.6;
         }
 
@@ -815,9 +1027,9 @@
             text-align: center;
             padding: 0.8rem 2rem 1.2rem;
             background: transparent;
-            transform: translateY(20px);
+            transform: translateY(30px);
             opacity: 0;
-            transition: all 0.8s ease 0.4s;
+            transition: all 1.2s ease 0.6s;
         }
 
         .connect-footer.visible {
@@ -922,6 +1134,103 @@
             </div>
         </section>
 
+        <!-- The Journey So Far Section -->
+        <section id="journey" class="journey-section">
+            <div class="container">
+                <div class="journey-wrapper">
+                    <!-- Header -->
+                    <div class="journey-header">
+                        <h3 class="journey-title">THE JOURNEY SO FAR</h3>
+                        <p class="journey-subtitle">
+                            Milestones that shaped my <span class="highlight-text">developer path</span>.
+                        </p>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="journey-timeline">
+                        <!-- Item 1 -->
+                        <div class="journey-item">
+                            <div class="journey-marker">
+                                <span class="journey-year">2026</span>
+                                <span class="journey-dot"></span>
+                            </div>
+                            <div class="journey-content">
+                                <h4>Web & Cloud Application Developer</h4>
+                                <p class="journey-company">iHelp International</p>
+                                <p class="journey-description">
+                                    Developing and enhancing fullstack web applications, supporting backend APIs, 
+                                    automation workflows, and cloud deployments.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="journey-item">
+                            <div class="journey-marker">
+                                <span class="journey-year">2023</span>
+                                <span class="journey-dot"></span>
+                            </div>
+                            <div class="journey-content">
+                                <h4>Post Graduation Diploma in Cloud Data Management</h4>
+                                <p class="journey-company">Conestoga College</p>
+                                <p class="journey-description">
+                                    Specialized in cloud infrastructure, DevOps, and scalable system design. 
+                                    GPA: 3.4/4.0.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="journey-item">
+                            <div class="journey-marker">
+                                <span class="journey-year">2021</span>
+                                <span class="journey-dot"></span>
+                            </div>
+                            <div class="journey-content">
+                                <h4>Data & Operations Analyst</h4>
+                                <p class="journey-company">A1 Snehanjali</p>
+                                <p class="journey-description">
+                                    Supported backend systems, API testing, deployment validation, and 
+                                    automation processes to improve operational efficiency.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="journey-item">
+                            <div class="journey-marker">
+                                <span class="journey-year">2021</span>
+                                <span class="journey-dot"></span>
+                            </div>
+                            <div class="journey-content">
+                                <h4>Master's of Science in Information Technology</h4>
+                                <p class="journey-company">University of Mumbai</p>
+                                <p class="journey-description">
+                                    Specialized in Cloud Computing. Built a strong foundation in distributed 
+                                    systems and scalable architectures.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="journey-item">
+                            <div class="journey-marker">
+                                <span class="journey-year">2018</span>
+                                <span class="journey-dot"></span>
+                            </div>
+                            <div class="journey-content">
+                                <h4>Started My Coding Journey</h4>
+                                <p class="journey-company">First Line of Code</p>
+                                <p class="journey-description">
+                                    Began with HTML, CSS, and JavaScript — and never looked back. 
+                                    Built my first static websites and discovered a passion for development.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Projects Preview Section -->
         <section id="projects-preview" style="width: 100%; padding: 0;">
@@ -979,44 +1288,47 @@
             </div>
         </section>
 
-        <!-- Connect Section with Slide-Up Effect -->
+        <!-- Connect Section with Pin and Reveal Effect -->
         <section id="connect" class="connect-section">
-            <div class="connect-container">
-                <!-- Left Column: Content -->
-                <div class="connect-content">
-                    <h2 class="connect-heading">Interested in <span class="highlight-text">connecting?</span></h2>
-                    <p class="connect-description">
-                        I'm always open to new opportunities, collaborations, or just a friendly chat. 
-                        Feel free to reach out!
-                    </p>
-                    <div class="connect-social">
-                        <a href="mailto:rechael@example.com" class="social-icon" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/rechaellop" class="social-icon" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://github.com/RechaelLop" class="social-icon" target="_blank" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
+            <!-- Pin Wrapper - takes full viewport height -->
+            <div class="connect-pin-wrapper">
+                <!-- Content that slides up -->
+                <div class="connect-container">
+                    <!-- Left Column: Content -->
+                    <div class="connect-content">
+                        <h2 class="connect-heading">Interested in <span class="highlight-text">connecting?</span></h2>
+                        <p class="connect-description">
+                            I'm always open to new opportunities, collaborations, or just a friendly chat. 
+                            Feel free to reach out!
+                        </p>
+                        <div class="connect-social">
+                            <a href="mailto:rechael@example.com" class="social-icon" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/rechaellop" class="social-icon" target="_blank" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/RechaelLop" class="social-icon" target="_blank" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Image -->
+                    <div class="connect-image">
+                        <img src="Gallery/profile-removebg-preview.png" alt="Let's connect" class="connect-img">
                     </div>
                 </div>
 
-                <!-- Right Column: Image -->
-                <div class="connect-image">
-                    <img src="Gallery/profile-removebg-preview.png" alt="Let's connect" class="connect-img">
-                </div>
+                <!-- Dotted Line Separator -->
+                <div class="connect-divider"></div>
+
+                <!-- Footer -->
+                <footer class="connect-footer">
+                    <p class="footer-copy">© 2025 Rechael. Built with minimalism in mind.</p>
+                </footer>
             </div>
-
-            <!-- Dotted Line Separator -->
-            <div class="connect-divider"></div>
-
-            <!-- Footer -->
-            <footer class="connect-footer">
-                <p class="footer-copy">© 2025 Rechael. Built with minimalism in mind.</p>
-            </footer>
-        </section>
-
+</section>
     <script>
 
         window.addEventListener('scroll', () => {
@@ -1046,6 +1358,28 @@
                     link.classList.add('active');
                 }
             });
+        });
+
+        // The Journey So Far - Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const journeyItems = document.querySelectorAll('.journey-item');
+
+            if (journeyItems.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                journeyItems.forEach(item => {
+                    observer.observe(item);
+                });
+            }
         });
 
         // Animated Counter Function
@@ -1177,21 +1511,32 @@
             });
         }
 
-        // Connect Section - Slide Up from Bottom
+        // Connect Section - Slide Up on Scroll with IntersectionObserver
         document.addEventListener('DOMContentLoaded', function() {
-            const connectContainer = document.querySelector('.connect-container');
-            const connectFooter = document.querySelector('.connect-footer');
+            const section = document.querySelector('.connect-section');
+            const container = document.querySelector('.connect-container');
+            const divider = document.querySelector('.connect-divider');
+            const footer = document.querySelector('.connect-footer');
 
-            if (connectContainer) {
-                // Trigger the animation when the page loads
-                setTimeout(() => {
-                    connectContainer.classList.add('visible');
-                    if (connectFooter) {
-                        connectFooter.classList.add('visible');
-                    }
-                }, 400);
+            if (section && container) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Add visible class to slide up content
+                            container.classList.add('visible');
+                            if (divider) divider.classList.add('visible');
+                            if (footer) footer.classList.add('visible');
+                            console.log('Connect section triggered!');
+                        }
+                    });
+                }, {
+                    threshold: 0.15,  // Trigger when 15% of the section is visible
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                observer.observe(section);
             } else {
-                console.error('Connect container not found!');
+                console.error('Connect section or container not found!');
             }
         });
     </script>
