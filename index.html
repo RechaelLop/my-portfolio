@@ -273,26 +273,29 @@
         
         }
 
-        /* The Journey So Far Section - Two Column Layout */
+        /* The Journey So Far Section - Equal Spacing */
         .journey-section {
-            padding: 4rem 0;
+            padding: 4rem 2rem;
             background: #f0eae4;
             border-radius: 24px;
             margin-top: 1rem;
+            scroll-margin-top: 100px;
         }
 
         .journey-wrapper {
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 4rem;
-            padding: 2rem 2rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0; /* Remove extra padding */
             align-items: start;
         }
 
         /* Left Column - Stationary */
         .journey-left {
             position: sticky;
-            top: 100px;
+            top: 140px;
             align-self: start;
             padding-top: 1rem;
         }
@@ -304,7 +307,7 @@
             letter-spacing: 3px;
             color: #999;
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
         }
 
         .journey-subtitle {
@@ -314,6 +317,7 @@
             color: #1a1a1a;
             margin: 0;
             line-height: 1.3;
+            padding-top: 2rem;
         }
 
         .journey-subtitle .highlight-text {
@@ -380,7 +384,7 @@
         /* Individual Journey Items */
         .journey-item {
             display: grid;
-            grid-template-columns: 60px 1fr 60px;
+            grid-template-columns: 64px 1fr 64px;
             gap: 1.5rem;
             align-items: center;
             margin-bottom: 2.5rem;
@@ -422,19 +426,34 @@
             z-index: 2;
         }
 
-        /* Image */
+        /* Image - Fixed Size */
         .journey-image {
             flex-shrink: 0;
+            width: 64px;
+            height: 64px;
         }
 
         .journey-img {
-            width: 56px;
-            height: 56px;
-            border-radius: 12px;
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
             object-fit: cover;
             background: #ffffff;
-            border: 1px solid #e0ddd8;
             padding: 4px;
+            display: block;
+        }
+
+        /* Placeholder icon for missing images */
+        .journey-img-placeholder {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #999;
         }
 
         /* Content */
@@ -460,6 +479,7 @@
             color: #1a1a1a;
             text-align: right;
             opacity: 0.6;
+            white-space: nowrap;
         }
 
         /* Responsive */
@@ -467,19 +487,26 @@
             .journey-wrapper {
                 grid-template-columns: 1fr 1.5fr;
                 gap: 2rem;
+                padding: 0;
             }
         }
 
         @media (max-width: 768px) {
+            .journey-section {
+                padding: 2rem 1rem;
+            }
+
             .journey-wrapper {
                 grid-template-columns: 1fr;
                 gap: 2rem;
-                padding: 1.5rem 1rem 2rem;
+                padding: 0;
             }
 
             .journey-left {
-                position: static;
-                text-align: center;
+                position: sticky;
+                top: 120px; /* Increased from 100px to leave more space from top */
+                align-self: start;
+                padding-top: 1rem;
             }
 
             .journey-subtitle {
@@ -497,9 +524,14 @@
                 width: 1rem;
             }
 
+            .journey-image {
+                width: 50px;
+                height: 50px;
+            }
+
             .journey-img {
-                width: 44px;
-                height: 44px;
+                width: 50px;
+                height: 50px;
             }
 
             .journey-content h4 {
@@ -510,7 +542,6 @@
                 font-size: 0.85rem;
             }
         }
-
         /* Projects Section - Full Width */
         .projects-preview {
             width: 100%;
@@ -1213,19 +1244,19 @@
                             <!-- Item 1: Web & Cloud Application Developer -->
                             <div class="journey-item">
                                 <div class="journey-image">
-                                    <img src="Gallery/ihelp-logo.png" alt="iHelp International" class="journey-img">
+                                    <img src="Gallery/iHelp.png" alt="iHelp International" class="journey-img">
                                 </div>
                                 <div class="journey-content">
                                     <h4>Web & Cloud Application Developer</h4>
                                     <p class="journey-company">iHelp International</p>
                                 </div>
-                                <div class="journey-year">2026</div>
+                                <div class="journey-year">2025</div>
                             </div>
 
                             <!-- Item 2: Data & Operations Analyst -->
                             <div class="journey-item">
                                 <div class="journey-image">
-                                    <img src="Gallery/a1-logo.png" alt="A1 Snehanjali" class="journey-img">
+                                    <img src="Gallery/A1.png" alt="A1 Snehanjali" class="journey-img">
                                 </div>
                                 <div class="journey-content">
                                     <h4>Data & Operations Analyst</h4>
@@ -1242,7 +1273,7 @@
                             <!-- Item 3: Post Graduation Diploma -->
                             <div class="journey-item">
                                 <div class="journey-image">
-                                    <img src="Gallery/conestoga-logo.png" alt="Conestoga College" class="journey-img">
+                                    <img src="Gallery/conestoga.png" alt="Conestoga College" class="journey-img">
                                 </div>
                                 <div class="journey-content">
                                     <h4>Post Graduation Diploma in Cloud Data Management</h4>
@@ -1254,7 +1285,7 @@
                             <!-- Item 4: Master's Degree -->
                             <div class="journey-item">
                                 <div class="journey-image">
-                                    <img src="Gallery/mumbai-logo.png" alt="University of Mumbai" class="journey-img">
+                                    <img src="Gallery/mumbai.png" alt="University of Mumbai" class="journey-img">
                                 </div>
                                 <div class="journey-content">
                                     <h4>Master's of Science in Information Technology</h4>
@@ -1266,7 +1297,7 @@
                             <!-- Item 5: Bachlor's Degree -->
                             <div class="journey-item">
                                 <div class="journey-image">
-                                    <img src="Gallery/mumbai-logo.png" alt="St. Xavier's College" class="journey-img">
+                                    <img src="Gallery/xavier.png" alt="St. Xavier's College" class="journey-img">
                                 </div>
                                 <div class="journey-content">
                                     <h4>Bachlor's of Science in Information Technology</h4>
@@ -1408,7 +1439,7 @@
             });
         });
 
-        // The Journey So Far - Scroll Animation
+        // The Journey So Far - Smooth Scroll with Offset
         document.addEventListener('DOMContentLoaded', function() {
             const journeyItems = document.querySelectorAll('.journey-item');
 
@@ -1416,15 +1447,20 @@
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
+                            // Add a small delay for smoother appearance
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, 100);
                         }
                     });
                 }, {
-                    threshold: 0.2,
-                    rootMargin: '0px 0px -50px 0px'
+                    threshold: 0.1, // Trigger when just 10% visible
+                    rootMargin: '0px 0px -80px 0px' // Trigger before item fully enters
                 });
 
-                journeyItems.forEach(item => {
+                journeyItems.forEach((item, index) => {
+                    // Add staggered delay for each item
+                    item.style.transitionDelay = `${index * 0.1}s`;
                     observer.observe(item);
                 });
             }
