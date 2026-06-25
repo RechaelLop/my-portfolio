@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Forum&display=swap" rel="stylesheet">
     <!-- Anonymous Pro - for body text -->
     <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -960,18 +961,31 @@
             background: #f0eae4;
             border-radius: 24px;
             margin-top: 1rem;
+            position: relative;
         }
 
         .personal-wrapper {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0;
+            position: relative;
         }
 
-        /* Header */
+        /* Cards Grid - 3 columns, 3 rows */
+        .personal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: auto 1fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        /* Header: spans columns 1-2 only */
         .personal-header {
+            grid-column: 1 / 3;
+            grid-row: 1;
             text-align: center;
-            margin-bottom: 3.5rem;
+            padding: 0.5rem 1rem 1rem;
         }
 
         .personal-title {
@@ -981,7 +995,7 @@
             letter-spacing: 3px;
             color: #999;
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .personal-subtitle {
@@ -1009,20 +1023,47 @@
             opacity: 0.2;
         }
 
-        /* Cards Grid */
-        .personal-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            perspective: 1000px;
+        /* Card 1: Medium - Left */
+        .card-1 {
+            grid-column: 1;
+            grid-row: 2 / 4;
+            height: 280px;
+        }
+
+        /* Card 2: Tall - Center */
+        .card-2 {
+            grid-column: 2;
+            grid-row: 2 / 4;
+            height: 380px;
+        }
+
+        /* Card 4: Short - Top Right */
+        .card-4 {
+            grid-column: 3;
+            grid-row: 2;
+            height: 200px;
+        }
+
+        /* Card 3: Short - Bottom Right */
+        .card-3 {
+            grid-column: 3;
+            grid-row: 3;
+            height: 200px;
         }
 
         /* Individual Card - 3D Flip */
         .personal-card {
             background: transparent;
-            height: 300px;
             cursor: pointer;
             perspective: 1000px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .personal-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .card-inner {
@@ -1047,32 +1088,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #ffffff;
             border: 1px solid #e0ddd8;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            overflow: hidden;
         }
 
         /* Different background colors for each card */
-        .personal-card:nth-child(1) .card-front {
+        .card-1 .card-front {
             background: #d4e6eb;
         }
-        .personal-card:nth-child(2) .card-front {
+        .card-2 .card-front {
             background: #ddddea;
         }
-        .personal-card:nth-child(3) .card-front {
-            background: #f0d6d6;
-        }
-        .personal-card:nth-child(4) .card-front {
+        .card-3 .card-front {
             background: #d6ead6;
+        }
+        .card-4 .card-front {
+            background: #f0d6d6;
         }
 
         .card-front-title {
-            font-family: 'Forum', serif;
-            font-size: 1.8rem;
+            font-family: 'Just Me Again Down Here', cursive;
+            font-size: 2.8rem;
             font-weight: 400;
             color: #1a1a1a;
             text-align: center;
             padding: 1rem;
+            line-height: 1.2;
         }
 
         /* Card Back */
@@ -1093,43 +1135,57 @@
 
         .card-back-img {
             width: 100%;
-            height: 160px;
+            height: 55%;
             object-fit: cover;
             background: #f5f5f5;
         }
 
         .card-back-description {
             font-family: 'Anonymous Pro', monospace;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: #555;
-            padding: 1.2rem 1.2rem 1.5rem;
+            padding: 1rem 1.2rem;
             line-height: 1.6;
             flex: 1;
             display: flex;
             align-items: center;
         }
 
-        /* Card flip animation on scroll */
-        .personal-card {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .personal-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .personal-card.visible .card-inner {
-            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-
         /* Responsive */
         @media (max-width: 1024px) {
             .personal-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto auto;
                 gap: 1.5rem;
+            }
+
+            .personal-header {
+                grid-column: 1 / 3;
+                grid-row: 1;
+            }
+
+            .card-1 {
+                grid-column: 1;
+                grid-row: 2;
+                height: 260px;
+            }
+
+            .card-2 {
+                grid-column: 2;
+                grid-row: 2;
+                height: 260px;
+            }
+
+            .card-4 {
+                grid-column: 1;
+                grid-row: 3;
+                height: 200px;
+            }
+
+            .card-3 {
+                grid-column: 2;
+                grid-row: 3;
+                height: 200px;
             }
         }
 
@@ -1138,43 +1194,38 @@
                 padding: 2rem 1rem;
             }
 
+            .personal-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 1.2rem;
+            }
+
+            .personal-header {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .card-1,
+            .card-2,
+            .card-3,
+            .card-4 {
+                grid-column: 1;
+                grid-row: auto;
+                height: 260px;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
             .personal-subtitle {
                 font-size: 1.5rem;
             }
 
-            .personal-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
-
-            .personal-card {
-                height: 240px;
-            }
-
             .card-front-title {
-                font-size: 1.3rem;
+                font-size: 2.2rem;
             }
 
             .card-back-img {
-                height: 120px;
-            }
-
-            .card-back-description {
-                font-size: 0.75rem;
-                padding: 0.8rem 1rem 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .personal-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
-
-            .personal-card {
-                height: 260px;
-                max-width: 320px;
-                margin: 0 auto;
+                height: 50%;
             }
         }
 
@@ -1595,18 +1646,18 @@
         <section id="personal" class="personal-section">
             <div class="container">
                 <div class="personal-wrapper">
-                    <!-- Header -->
-                    <div class="personal-header">
-                        <h3 class="personal-title">PERSONAL STUFF</h3>
-                        <p class="personal-subtitle">
-                            A glimpse into what makes me, <span class="highlight-text">me</span>.
-                        </p>
-                    </div>
-
                     <!-- Cards Grid -->
                     <div class="personal-grid">
-                        <!-- Card 1: Getting Real -->
-                        <div class="personal-card">
+                        <!-- Header: Title & Subtitle (spans columns 1-2) -->
+                        <div class="personal-header">
+                            <h3 class="personal-title">PERSONAL STUFF</h3>
+                            <p class="personal-subtitle">
+                                A glimpse into what makes me, <span class="highlight-text">me</span>.
+                            </p>
+                        </div>
+
+                        <!-- Card 1: Getting Real (Medium - Left) -->
+                        <div class="personal-card card-1">
                             <div class="card-inner">
                                 <div class="card-front">
                                     <h4 class="card-front-title">Getting Real</h4>
@@ -1618,8 +1669,8 @@
                             </div>
                         </div>
 
-                        <!-- Card 2: Reading -->
-                        <div class="personal-card">
+                        <!-- Card 2: Reading (Tall - Center) -->
+                        <div class="personal-card card-2">
                             <div class="card-inner">
                                 <div class="card-front">
                                     <h4 class="card-front-title">Reading</h4>
@@ -1631,8 +1682,8 @@
                             </div>
                         </div>
 
-                        <!-- Card 3: Achievements -->
-                        <div class="personal-card">
+                        <!-- Card 4: Achievements (Short - Top Right) -->
+                        <div class="personal-card card-4">
                             <div class="card-inner">
                                 <div class="card-front">
                                     <h4 class="card-front-title">Achievements</h4>
@@ -1644,8 +1695,8 @@
                             </div>
                         </div>
 
-                        <!-- Card 4: Community -->
-                        <div class="personal-card">
+                        <!-- Card 3: Community (Short - Bottom Right) -->
+                        <div class="personal-card card-3">
                             <div class="card-inner">
                                 <div class="card-front">
                                     <h4 class="card-front-title">Community</h4>
@@ -1901,11 +1952,13 @@
                         }
                     });
                 }, {
-                    threshold: 0.2,
+                    threshold: 0.15,
                     rootMargin: '0px 0px -50px 0px'
                 });
 
-                personalCards.forEach(card => {
+                personalCards.forEach((card, index) => {
+                    // Add staggered delay
+                    card.style.transitionDelay = `${index * 0.1}s`;
                     observer.observe(card);
                 });
             }
