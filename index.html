@@ -954,6 +954,230 @@
             transform: translateX(3px);
         }
 
+        /* Personal Stuff Section */
+        .personal-section {
+            padding: 4rem 2rem;
+            background: #f0eae4;
+            border-radius: 24px;
+            margin-top: 1rem;
+        }
+
+        .personal-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header */
+        .personal-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .personal-title {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .personal-subtitle {
+            font-family: 'Forum', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .personal-subtitle .highlight-text {
+            color: #f68f3b;
+            position: relative;
+        }
+
+        .personal-subtitle .highlight-text::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #f68f3b;
+            opacity: 0.2;
+        }
+
+        /* Cards Grid */
+        .personal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        /* Individual Card - 3D Flip */
+        .personal-card {
+            background: transparent;
+            height: 300px;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transform-style: preserve-3d;
+        }
+
+        .personal-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Card Front */
+        .card-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border: 1px solid #e0ddd8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        /* Different background colors for each card */
+        .personal-card:nth-child(1) .card-front {
+            background: #d4e6eb;
+        }
+        .personal-card:nth-child(2) .card-front {
+            background: #ddddea;
+        }
+        .personal-card:nth-child(3) .card-front {
+            background: #f0d6d6;
+        }
+        .personal-card:nth-child(4) .card-front {
+            background: #d6ead6;
+        }
+
+        .card-front-title {
+            font-family: 'Forum', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Card Back */
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            transform: rotateY(180deg);
+            background: #ffffff;
+            border: 1px solid #e0ddd8;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .card-back-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: #f5f5f5;
+        }
+
+        .card-back-description {
+            font-family: 'Anonymous Pro', monospace;
+            font-size: 0.85rem;
+            color: #555;
+            padding: 1.2rem 1.2rem 1.5rem;
+            line-height: 1.6;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Card flip animation on scroll */
+        .personal-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .personal-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .personal-card.visible .card-inner {
+            transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .personal-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .personal-section {
+                padding: 2rem 1rem;
+            }
+
+            .personal-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .personal-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .personal-card {
+                height: 240px;
+            }
+
+            .card-front-title {
+                font-size: 1.3rem;
+            }
+
+            .card-back-img {
+                height: 120px;
+            }
+
+            .card-back-description {
+                font-size: 0.75rem;
+                padding: 0.8rem 1rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .personal-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .personal-card {
+                height: 260px;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+        }
+
         /* Connect Section - Slide Up from Bottom */
         .connect-section {
             height: 100vh; /* Takes full viewport height */
@@ -1367,6 +1591,76 @@
             </div>
         </section>
 
+        <!-- Personal Stuff Section -->
+        <section id="personal" class="personal-section">
+            <div class="container">
+                <div class="personal-wrapper">
+                    <!-- Header -->
+                    <div class="personal-header">
+                        <h3 class="personal-title">PERSONAL STUFF</h3>
+                        <p class="personal-subtitle">
+                            A glimpse into what makes me, <span class="highlight-text">me</span>.
+                        </p>
+                    </div>
+
+                    <!-- Cards Grid -->
+                    <div class="personal-grid">
+                        <!-- Card 1: Getting Real -->
+                        <div class="personal-card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h4 class="card-front-title">Getting Real</h4>
+                                </div>
+                                <div class="card-back">
+                                    <img src="Gallery/getting-real.jpg" alt="Getting Real" class="card-back-img">
+                                    <p class="card-back-description">I believe in building things that matter. No fluff, just real solutions to real problems.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Reading -->
+                        <div class="personal-card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h4 class="card-front-title">Reading</h4>
+                                </div>
+                                <div class="card-back">
+                                    <img src="Gallery/reading.jpg" alt="Reading" class="card-back-img">
+                                    <p class="card-back-description">From tech blogs to philosophy, I read to learn, unlearn, and grow every single day.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Achievements -->
+                        <div class="personal-card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h4 class="card-front-title">Achievements</h4>
+                                </div>
+                                <div class="card-back">
+                                    <img src="Gallery/achievements.jpg" alt="Achievements" class="card-back-img">
+                                    <p class="card-back-description">Best Team Award (2019) — Recognized for collaboration, technical problem-solving, and successful delivery.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Community -->
+                        <div class="personal-card">
+                            <div class="card-inner">
+                                <div class="card-front">
+                                    <h4 class="card-front-title">Community</h4>
+                                </div>
+                                <div class="card-back">
+                                    <img src="Gallery/community.jpg" alt="Community" class="card-back-img">
+                                    <p class="card-back-description">I love connecting with like-minded people, sharing knowledge, and contributing to open source.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Connect Section with Pin and Reveal Effect -->
         <section id="connect" class="connect-section">
             <!-- Pin Wrapper - takes full viewport height -->
@@ -1594,6 +1888,28 @@
                 });
             });
         }
+
+        // Personal Stuff - Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const personalCards = document.querySelectorAll('.personal-card');
+
+            if (personalCards.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+
+                personalCards.forEach(card => {
+                    observer.observe(card);
+                });
+            }
+        });
 
         // Connect Section - Slide Up on Scroll with IntersectionObserver
         document.addEventListener('DOMContentLoaded', function() {
